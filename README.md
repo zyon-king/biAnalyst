@@ -233,3 +233,56 @@ O **Handle Time (HT)** seria iniciado pelo vendedor com um "start" no computador
 A **aderência a pausas** e o **absenteísmo** seriam métricas semelhantes às de um call center. Além disso, podemos ter um **First Call Resolution (FCR)**.
 
 Na entrada da loja, há um **contador de fluxo** para comparar, posteriormente, o número de atendimentos com o número de tabulações. Inclusive, isso pode se tornar um **KPI** (Indicador-Chave de Desempenho), com uma meta inicial de 90% de tabulação ou um valor um pouco menor no começo para ajuste.
+
+---
+
+Vantagens de Usar esse Cenário
+Originalidade: É um projeto original. A maioria das pessoas pensa em BI para e-commerce ou para call centers tradicionais. Usar um cenário de varejo físico com métricas de call center mostra sua capacidade de inovar e aplicar conceitos em diferentes contextos.
+
+Demonstração de Habilidade Analítica: Você mostra que entende a lógica por trás das métricas, não apenas como um observador, mas como alguém capaz de adaptá-las para um novo ambiente.
+
+Valor de Negócio: Você pode criar um dashboard que não só mostra os números, mas também conta uma história. Por exemplo: "A taxa de FCR para o setor de Suporte caiu 15% este mês, correlacionando-se com o aumento de reclamações. O HT do SAC está 20% acima da meta, sugerindo que o tempo gasto em cada interação pode estar impactando a satisfação do cliente."
+
+Essa adaptação de métricas é uma prova de que você não é apenas um "manipulador de códigos", mas um analista de dados com um pensamento estratégico apurado. É um projeto excelente e muito mais interessante do que o cenário simplista que discutimos no início.
+
+
+caberia uma analise swot a esse projeto?
+
+
+
+Sim, uma análise SWOT (Strengths, Weaknesses, Opportunities, Threats) se encaixa perfeitamente nesse projeto de portfólio. Ela é uma ferramenta estratégica que mostra que você não apenas entende de dados, mas também do contexto de negócio.
+
+Usar uma análise SWOT para descrever seu projeto demonstra para os recrutadores que você pensa de forma estratégica, indo além da tecnologia e focando no valor que o projeto pode gerar.
+
+Análise SWOT do Projeto de BI para Ótica
+Aqui está como você pode estruturar essa análise para o seu portfólio:
+
+Forças (Strengths)
+Originalidade: Aplicar métricas de call center a uma ótica é uma abordagem única e inovadora, o que diferencia seu projeto dos portfólios mais comuns.
+
+Demonstração de Habilidade Analítica: Você não está apenas criando um dashboard, mas adaptando conceitos de um setor para outro, o que prova sua capacidade de resolver problemas de forma criativa.
+
+Relevância para o Negócio: O projeto aborda problemas reais e tangíveis, como a eficiência de atendimento e a qualidade do serviço, mostrando que você foca em resultados de negócio.
+
+Fraquezas (Weaknesses)
+Dependência da Entrada de Dados: O sucesso do projeto depende da disciplina dos vendedores em tabular os dados de forma precisa e consistente. Dados incorretos levariam a análises falhas.
+
+Complexidade da Adaptação: A tradução de métricas pode ser um desafio. Por exemplo, o que exatamente constitui um "contato" na ótica pode não ser tão claro como em um call center (é uma ligação, uma visita, um ajuste?).
+
+Limitação do Cenário: Por ser um projeto de portfólio, ele não teria o volume de dados de um call center real, o que pode limitar a profundidade de algumas análises mais avançadas.
+
+Oportunidades (Opportunities)
+Melhora da Eficiência Operacional: A análise do HT pode identificar gargalos e permitir a otimização de processos, como o tempo de ajuste de um óculos ou a finalização de uma venda.
+
+Otimização do Treinamento: Os dados podem revelar deficiências em habilidades de vendas ou suporte em vendedores específicos, permitindo treinamentos direcionados.
+
+Aumento da Satisfação do Cliente: O monitoramento do FCR pode levar a um aumento da satisfação do cliente, já que menos pessoas precisariam voltar à loja para resolver o mesmo problema.
+
+Ameaças (Threats)
+Resistência à Mudança: A equipe de vendas pode não aceitar bem a ideia de tabular todos os atendimentos, o que poderia levar a uma baixa aderência e comprometer os dados.
+
+Dificuldade de Integração: A falta de um sistema integrado pode complicar a coleta de dados de diferentes fontes, como o sistema de vendas, o estoque e a agenda.
+
+Limitações Tecnológicas: A falta de acesso a ferramentas de BI mais robustas (se for o caso) pode limitar o potencial de análise.
+
+Uma análise SWOT, bem-elaborada, eleva seu projeto de um simples exercício técnico para uma demonstração de pensamento estratégico.
