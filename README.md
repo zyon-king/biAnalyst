@@ -217,3 +217,19 @@ O projeto da ótica, embora útil, é muito simples e não explora a complexidad
 
 Recomenda-se começar com o desafio maior. Deve-se usar o conhecimento já existente para construir algo que realmente impressione. Não é preciso ser um programador para ser um excelente analista de BI, e o projeto de portfólio de call center vai provar isso.
 
+---
+
+### Aplicação das Métricas de Call Center na Ótica
+
+O vendedor finaliza um atendimento e tabula no sistema a sua natureza:
+
+* **Comercial:** para vendas.
+* **Retenção:** para clientes no plano de fidelidade.
+* **SAC:** para tirar dúvidas.
+* **Suporte:** para ajuste ou solicitação de garantia.
+
+O **Handle Time (HT)** seria iniciado pelo vendedor com um "start" no computador antes de começar a atender o cliente e finalizado com a tabulação ao término do atendimento.
+
+A **aderência a pausas** e o **absenteísmo** seriam métricas semelhantes às de um call center. Além disso, podemos ter um **First Call Resolution (FCR)**.
+
+Na entrada da loja, há um **contador de fluxo** para comparar, posteriormente, o número de atendimentos com o número de tabulações. Inclusive, isso pode se tornar um **KPI** (Indicador-Chave de Desempenho), com uma meta inicial de 90% de tabulação ou um valor um pouco menor no começo para ajuste.
