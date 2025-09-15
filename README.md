@@ -94,3 +94,32 @@ WHERE
 DataVenda = GETDATE()
 GROUP BY
 DataVenda;
+```
+
+---
+
+### **Principais Indicadores de Call Center (KPIs)**
+
+Com base nas atividades de um analista de BI e MIS em uma empresa como a Teleperformance, os principais indicadores que um cliente de call center tem como meta estão diretamente relacionados à eficiência operacional e à qualidade do serviço. Os KPIs mencionados — **ABS**, **HT**, **Aderência** e **Qualidade** — são centrais, mas há outros igualmente importantes.
+
+Os KPIs são geralmente divididos em categorias para cobrir todos os aspectos da operação: produtividade, qualidade e satisfação do cliente.
+
+#### **1. Produtividade e Eficiência**
+
+* **ABS (Absenteeism)**: Taxa de ausência dos colaboradores. Uma taxa alta pode indicar problemas de engajamento da equipe e impactar a capacidade de atendimento, gerando sobrecarga.
+* **HT (Handle Time) ou TMA (Tempo Médio de Atendimento)**: Tempo médio que um operador leva para resolver uma interação. Um HT baixo indica eficiência, mas um valor excessivamente baixo pode sinalizar pressa e impactar a qualidade.
+* **Aderência (Adherence to Schedule)**: Percentual de tempo em que um operador segue a programação de trabalho. A baixa aderência pode prejudicar o dimensionamento de pessoal e a qualidade do serviço.
+* **TMO (Tempo Médio Operacional)**: Mede o tempo médio gasto pelo operador para resolver uma interação do cliente, incluindo o tempo de espera, o tempo de atendimento e o tempo de pós-atendimento.
+
+#### **2. Qualidade e Satisfação**
+
+* **Qualidade**: Esse é um indicador mais amplo, medido através de diferentes métricas, como a **taxa de FCR (First Call Resolution)**.
+* **FCR (First Call Resolution)**: Percentual de problemas que são resolvidos na primeira chamada ou contato. Um alto FCR é uma meta importante, pois reduz o retrabalho e aumenta a satisfação do cliente.
+* **NPS (Net Promoter Score)**: Mede a satisfação e lealdade do cliente com base em uma única pergunta. O resultado é categorizado em promotores, neutros e detratores.
+* **Satisfação do Cliente (CSAT - Customer Satisfaction)**: Avalia o quão satisfeito um cliente está com uma interação ou um serviço específico. Geralmente é medido por meio de uma pesquisa rápida ao final da chamada.
+
+---
+
+### **Como o Analista de BI e MIS Atua**
+
+O **Analista de BI e MIS** coleta, transforma e analisa dados de todas essas métricas. Ele cria painéis e relatórios no **Power BI** (ou outra ferramenta de BI) para monitorar o desempenho em tempo real. Por exemplo, ele pode criar um dashboard que mostre a aderência por operador, o FCR por tipo de problema ou o NPS por campanha de atendimento, permitindo que os supervisores tomem decisões rápidas e estratégicas.
