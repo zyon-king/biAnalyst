@@ -2,6 +2,50 @@
 An BI analyst collects, cleans, and analyzes data to identify trends, transforming complex information into actionable insights. They create visual reports and dashboards to help companies make strategic decisions, improve efficiency, and achieve business goals.
 
 ---
+## **ANALISTA DE BI E MIS JUNIOR - DIDI**
+
+### **Plano de Carreira**
+
+Neste processo, buscamos conhecer profissionais de diversas áreas, incluindo **Especialistas em Interação**, **Líderes Educadores**, **Monitores de Qualidade**, **Supervisores de Atendimento** e **Analistas das Áreas de Staff** com mais de 3 meses de experiência.
+
+---
+
+### **Requisitos**
+
+* **Necessário**: Ensino Superior cursando ou completo.
+
+* **Desejável**:
+    * Experiência na área de **BI e MIS**.
+    * Conhecimentos em linguagem **SQL**.
+    * Conhecimento dos principais **Key Performance Indicators (KPIs)** utilizados em Call Centers.
+    * Conhecimento em ferramentas de **Business Intelligence (BI)**.
+    * Disponibilidade total de horário.
+    * Disponibilidade para atuar no campus Água Branca.
+
+---
+
+### **Atividades da Posição**
+
+O profissional será responsável por:
+
+* **Extrair, transformar e analisar** dados transacionais das ferramentas da Teleperformance ou de seus clientes. Isso será feito por meio de processos manuais ou automatizados, respeitando os métodos e direitos de acesso de cada ferramenta.
+* **Atualizar e publicar** demonstrativos de resultados e controles de **KPIs** (relatórios, dashboards, etc.), de acordo com a periodicidade definida entre o cliente e a Teleperformance. Esta etapa inclui a análise e validação da integridade dos dados.
+* **Elaborar novos demonstrativos** de resultados e **controles de KPIs** solicitados por clientes internos e externos, oferecendo visões analíticas e comparativos históricos.
+
+---
+
+### **Etapas do Processo Seletivo**
+
+1.  Validação de cadastro e salário.
+2.  Etapa de provas.
+3.  Entrevista com o time de carreira e requisitante.
+
+---
+
+**Prazo de Inscrição**: 15/09/2025 às 23h59.  
+**Meses Avaliados**: 3 últimos meses.  
+
+---
 ### A Rotina do Vendedor-Analista: João e o Power BI na Ótica
 
 Com a ausência do gerente, a rotina de João, o vendedor responsável, se transforma. Ele não é mais apenas um vendedor, mas também o analista de dados da loja. Sua rotina diária e semanal é meticulosamente organizada para extrair o máximo de valor dos dados da ótica.
