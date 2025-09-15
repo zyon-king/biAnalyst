@@ -181,4 +181,39 @@ O **RH** não é opcional; ele é uma peça-chave, especialmente na área de **A
 
 * **Narrativa de Negócio**: Para cada dashboard, inclua uma breve análise. Por exemplo: "O painel abaixo mostra que a equipe de 'Suporte' no turno da noite tem o maior FCR, mas um HT acima da meta, sugerindo que os operadores estão resolvendo problemas complexos, mas precisam de treinamento para otimizar o tempo."
 
-Seu cenário é ideal. A complexidade de ter 4 áreas e 2 turnos, com diferentes níveis de gestão, oferece uma oportunidade perfeita para demonstrar suas habilidades analíticas.
+A complexidade de ter 4 áreas e 2 turnos, com diferentes níveis de gestão, oferece uma oportunidade perfeita para demonstrar suas habilidades analíticas.
+
+---
+
+### Escolha final do tipo de Projeto
+
+Tenho a habilidade de manipular códigos e, atualmente, utilizo uma aplicação que combina a minha escala com a de outra pessoa. Mensalmente, nós extraímos as nossas escalas do sistema da empresa para alimentar o aplicativo. Nele, basta ticar os dias de folga, e o código em JavaScript faz a combinação. No servidor, tenho uma função que utiliza uma variável de ambiente com um token, e, ao carregar a aplicação, é feita uma solicitação desse token para garantir que somente eu e essa pessoa tenhamos acesso.
+
+Tenho considerado entre começar com um projeto menor, como uma ótica com um gerente e dois vendedores que tabulam cada atendimento no sistema para alimentar a inteligência de negócios (BI), ou, considerando a minha habilidade em manipulação de dados, começar com o projeto maior de um call center.
+
+---
+
+Com a experiência atual em manipulação de código e a compreensão da lógica de um fluxo de dados (da entrada no frontend até a função no servidor), começar com o projeto de call center é a melhor escolha.
+
+---
+
+### Análise Crítica e Realista
+
+A experiência com a aplicação de escala já demonstra as habilidades essenciais que um analista de BI precisa. Os seguintes conceitos são compreendidos:
+
+* **Extração e Entrada de Dados:** Há o manejo da entrada manual de dados em um sistema (o aplicativo).
+* **Segurança e Autenticação:** O uso de um token e variáveis de ambiente mostra uma noção básica de segurança e restrição de acesso a dados.
+* **Lógica de Negócio:** O código em JavaScript faz uma "combinação" das escalas, o que é uma forma de análise e transformação de dados. Há uma compreensão da lógica de negócio por trás dos dados.
+
+---
+
+### Por que o Call Center é o Cenário Ideal
+
+O projeto da ótica, embora útil, é muito simples e não explora a complexidade do conhecimento. O cenário de call center, por outro lado, é um ambiente real e desafiador, perfeito para demonstrar as habilidades.
+
+* **Complexidade Real:** Um call center envolve várias métricas e relações (vendas, qualidade, RH) que um projeto de ótica não tem. Isso permite mostrar como transformar dados de diferentes fontes em *insights* valiosos.
+* **Habilidades Transferíveis:** Se um painel de BI para um call center é criado, os recrutadores saberão que a adaptação a qualquer outro setor (varejo, *e-commerce*, saúde, etc.) é fácil.
+* **Valor no Portfólio:** Um projeto de call center tem um impacto maior. É possível criar painéis que mostram como a qualidade do atendimento afeta as vendas ou como o absenteísmo do RH impacta a eficiência das equipes. Esse tipo de análise é muito valorizado no mercado.
+
+Recomenda-se começar com o desafio maior. Deve-se usar o conhecimento já existente para construir algo que realmente impressione. Não é preciso ser um programador para ser um excelente analista de BI, e o projeto de portfólio de call center vai provar isso.
+
