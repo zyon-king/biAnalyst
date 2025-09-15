@@ -118,8 +118,29 @@ Os KPIs são geralmente divididos em categorias para cobrir todos os aspectos da
 * **NPS (Net Promoter Score)**: Mede a satisfação e lealdade do cliente com base em uma única pergunta. O resultado é categorizado em promotores, neutros e detratores.
 * **Satisfação do Cliente (CSAT - Customer Satisfaction)**: Avalia o quão satisfeito um cliente está com uma interação ou um serviço específico. Geralmente é medido por meio de uma pesquisa rápida ao final da chamada.
 
----
-
 ### **Como o Analista de BI e MIS Atua**
 
 O **Analista de BI e MIS** coleta, transforma e analisa dados de todas essas métricas. Ele cria painéis e relatórios no **Power BI** (ou outra ferramenta de BI) para monitorar o desempenho em tempo real. Por exemplo, ele pode criar um dashboard que mostre a aderência por operador, o FCR por tipo de problema ou o NPS por campanha de atendimento, permitindo que os supervisores tomem decisões rápidas e estratégicas.
+
+---
+
+## Projeto
+
+O projeto cobre todas as etapas essenciais de um fluxo de trabalho de Business Intelligence, o que o torna um portfólio completo e atraente para recrutadores. Além disso, ele demonstra seu conhecimento em diversas áreas-chave.
+
+### **Pontos Fortes e Oportunidades**
+
+* **Ampla Visibilidade de Habilidades**: O projeto mostra a cadeia de valor completa dos dados: da **coleta** (frontend), passando pela **engenharia e extração** (função no servidor com SQL), até a **análise e visualização** (BI e página web). Isso é um grande diferencial.
+* **Tecnologias Modernas**: A combinação de um **frontend** (pode usar React, Vue.js, etc.), uma função de **backend** (Node.js, Python/Flask, etc.) e **SQL** demonstra um ecossistema de desenvolvimento moderno.
+* **Foco em Resultados**: O objetivo final de exibir os dados em uma página web (possivelmente incorporando um dashboard do Power BI ou Tableau) mostra que você não apenas manipula dados, mas também os transforma em **insights acessíveis e úteis para o negócio**.
+
+---
+
+### **Pontos de Crítica e Melhoria**
+
+Apesar da viabilidade, há alguns pontos para considerar e aprimorar, garantindo que o projeto seja robusto e profissional:
+
+* **Complexidade da Camada de Backend**: A "função no server" é o ponto mais crítico, sendo preciso garantir que ela seja segura e eficiente.
+* **Conexão Segura**: O frontend **não deve se conectar diretamente ao banco de dados**. A função do servidor atuará como uma **API**, recebendo os dados do frontend e fazendo a extração no banco de dados com SQL. Isso é crucial para a segurança.
+* **Cenário de Negócio**: Para tornar o projeto mais relevante, é fundamental **definir um cenário de negócio claro**. Isso dá um propósito aos dados e torna a análise mais significativa.
+* **Detalhes da Visualização**: O ideal é **usar uma ferramenta como o Power BI ou Tableau** e depois incorporar o painel na página.
