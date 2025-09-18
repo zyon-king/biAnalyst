@@ -1,5 +1,8 @@
 # biAnalyst
 An BI analyst collects, cleans, and analyzes data to identify trends, transforming complex information into actionable insights. They create visual reports and dashboards to help companies make strategic decisions, improve efficiency, and achieve business goals.
+---
+
+[ESTUDOS](#estudos)
 
 ---
 ## **ANALISTA DE BI E MIS JUNIOR - DIDI**
@@ -299,6 +302,15 @@ Uma análise SWOT, bem-elaborada, eleva seu projeto de um simples exercício té
     * **SOMASE**
     * **ÍNDICE**
     * **CORRESP**
+    *   * **XLOOKUP**
+    * **FILTER**
+    * **SORT**
+    * **UNIQUE**
+    * **SUMIFS**
+    * **COUNTIFS**
+    * **IFS**
+    * **TEXTJOIN**
+    * **LET**
   
 * **SQL**
     * **SELECT***
