@@ -316,8 +316,15 @@ Uma análise SWOT, bem-elaborada, eleva seu projeto de um simples exercício té
 
 
 * **KPIs de Call Center**
-    * **asd***
-
+    * **ABS (Absenteeism)**
+    * **HT (Handle Time) ou TMA (Tempo Médio de Atendimento)**
+    * **Aderência (Adherence to Schedule)**
+    * **TMO (Tempo Médio Operacional)**
+    * **Qualidade**
+    * **FCR (First Call Resolution)**
+    * **NPS (Net Promoter Score)**
+    * **Satisfação do Cliente (CSAT - Customer Satisfaction)**
+    * **Turnover**
 
 * **asd**
     * **asd***
