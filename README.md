@@ -299,22 +299,34 @@ Uma análise SWOT, bem-elaborada, eleva seu projeto de um simples exercício té
     * **SOMASE**
     * **ÍNDICE**
     * **CORRESP**
-
+  
 * **SQL**
     * **SELECT***
     * **WHERE***
     * **GROUP BY***
     * **JOINs***
-
+  
 * **Ferramentas de BI (Power BI/Tableau)**
     * **DAX (Data Analysis Expressions)***
-    * ** ... ***
-
+    * **Conectar Excel, CSV, SQL Server, etc.***
+    * **Import***
+    * **DirectQuery***
 
 * **Conceitos de ETL**
-    * **Conceito 1 -***
+    * **Remover colunas***
+    * **Alterar tipos de dados***
+    * **Merge Queries***
+    * **Append Queries***
+    * **Tabelas de fatos**
+    * **Tabelas de dimensão***
+    * **Relacionamentos entre as tabelas**
+    * **Filtro de mão única e de mão dupla**
+    * **Tipos de gráficos (barras, linhas, pizza, etc.)**
+    * **Slicers**
+    * **Gateways e agendamento de atualização de dados**
+    * **Power BI Service: Desktop e Service**
 
-
+  
 * **KPIs de Call Center**
     * **ABS (Absenteeism)**
     * **HT (Handle Time) ou TMA (Tempo Médio de Atendimento)**
