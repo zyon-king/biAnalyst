@@ -302,7 +302,7 @@ Uma análise SWOT, bem-elaborada, eleva seu projeto de um simples exercício té
     * **SOMASE**
     * **ÍNDICE**
     * **CORRESP**
-    *   * **XLOOKUP**
+    * **XLOOKUP**
     * **FILTER**
     * **SORT**
     * **UNIQUE**
@@ -312,11 +312,29 @@ Uma análise SWOT, bem-elaborada, eleva seu projeto de um simples exercício té
     * **TEXTJOIN**
     * **LET**
   
-* **SQL**
-    * **SELECT***
-    * **WHERE***
-    * **GROUP BY***
-    * **JOINs***
+* **SQL**  
+    * `SELECT`  
+    * `FROM`  
+    * `WHERE`  
+    * `GROUP BY`  
+    * `HAVING`
+    * `ORDER BY`  
+    * `JOIN` (e seus tipos: `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL OUTER JOIN`)  
+    * `AS` (para apelidos de colunas e tabelas)  
+    * `UNION` e `UNION ALL`  
+    * `INSERT INTO`  
+    * `UPDATE`  
+    * `DELETE FROM`  
+    * `COUNT`  
+    * `SUM`  
+    * `AVG`  
+    * `MIN`  
+    * `MAX`  
+    * `DISTINCT`  
+    * `LIKE`  
+    * `IN`  
+    * `BETWEEN`  
+    * `CASE`  
   
 * **Ferramentas de BI (Power BI/Tableau)**
     * **DAX (Data Analysis Expressions)***
