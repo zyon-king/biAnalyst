@@ -286,3 +286,42 @@ Dificuldade de Integração: A falta de um sistema integrado pode complicar a co
 Limitações Tecnológicas: A falta de acesso a ferramentas de BI mais robustas (se for o caso) pode limitar o potencial de análise.
 
 Uma análise SWOT, bem-elaborada, eleva seu projeto de um simples exercício técnico para uma demonstração de pensamento estratégico.
+
+---
+
+# ESTUDOS
+
+---
+
+### Excel
+* **Fórmulas Avançadas:**
+    * **PROCV**
+    * **SOMASE**
+    * **ÍNDICE**
+    * **CORRESP**
+
+* **SQL**
+    * **SELECT***
+    * **WHERE***
+    * **GROUP BY***
+    * **JOINs***
+
+* **Ferramentas de BI (Power BI/Tableau)**
+    * **DAX (Data Analysis Expressions)***
+    * ** ... ***
+
+
+* **Conceitos de ETL**
+    * **Conceito 1 -***
+
+
+* **KPIs de Call Center**
+    * **asd***
+
+
+* **asd**
+    * **asd***
+
+
+* **asd**
+    * **asd***
