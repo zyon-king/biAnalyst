@@ -369,7 +369,7 @@ Uma análise SWOT, bem-elaborada, eleva seu projeto de um simples exercício té
     * **Turnover**
 
 * **asd**
-    * **asd***
+    * **asd*** 
 
 
 * **asd**
