@@ -11,9 +11,8 @@
 // ===================================
 // index.js (Correção)
 // ===================================
-
 // ===================================
-// index.js (Appwrite Function com INSERT)
+// index.js (Appwrite Function Corrigida)
 // ===================================
 
 const { createClient } = require('@supabase/supabase-js');
@@ -24,6 +23,7 @@ const supabase = createClient(
 );
 
 module.exports = async ({ req, res, log, error }) => {
+    // AQUI ESTÁ A CORREÇÃO: Analise o corpo da requisição
     const { acao, parametros } = JSON.parse(req.body);
 
     try {
@@ -52,7 +52,6 @@ module.exports = async ({ req, res, log, error }) => {
                 resultado = data2;
                 break;
 
-            // -- NOVO: Adiciona um novo registro na tabela 'quantidades' --
             case 'adicionar-quantidade':
                 const { Produto, Quantia, Loja } = parametros;
                 const { data: insertData, error: insertError } = await supabase
@@ -63,7 +62,6 @@ module.exports = async ({ req, res, log, error }) => {
                 resultado = insertData;
                 break;
             
-            // -- NOVO: Adiciona um novo registro na tabela 'vendas' --
             case 'adicionar-venda':
                 const { Produto: prodVenda, Valor, Loja: lojaVenda } = parametros;
                 const { data: insertVendaData, error: insertVendaError } = await supabase
