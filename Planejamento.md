@@ -25,61 +25,62 @@ A ideia não é permitir digitação de SQL sem verificação de segurança, mas
 
 ---
 
-### DELETE FROM = deletar dados
-### UPDATE = atualizar dados
-### INSERT INTO = inserir dados
-### DROP TABLE = excluir tabela
-### ALTER TABLE = alterar estrutura
-### ADD COLUMN = adicionar coluna
-### DROP COLUMN = remover coluna
-### CREATE TABLE = criar tabela
-### PRIMARY KEY = chave primária
-### FOREIGN KEY = chave estrangeira
-### UNIQUE = valor único
-### CHECK = restrição
-### DEFAULT = valor padrão
-### INDEX = índice
-### VIEW = visão virtual
-### STORED PROCEDURE = procedimento armazenado
-### TRIGGER = gatilho
-### TRANSACTION = transação
-### COMMIT = confirmar
-### ROLLBACK = desfazer
-### SELECT = campos
-### FROM = tabela
-### WHERE = condição
-### GROUP BY = agrupar
-### HAVING = condição após agrupamento
-### ORDER BY = ordenar
-### JOIN = junção de tabelas
-### INNER JOIN = apenas correspondentes
-### LEFT JOIN = todos da esquerda
-### RIGHT JOIN = todos da direita
-### FULL OUTER JOIN = todos os registros de ambas
-### AS = apelido
-### COUNT = contar registros
-### SUM = somar valores
-### AVG = média
-### MIN = mínimo
-### MAX = máximo
-### DISTINCT = remover duplicados
-### LIKE = correspondência parcial
-### IN = pertence a lista
-### BETWEEN = intervalo
-### CASE = condicional
-### EXISTS = existência
-### NOT = negação
-### IS NULL / IS NOT NULL = nulo
-### LIMIT = limite de resultados (MySQL, PostgreSQL)
-### OFFSET = ignorar linhas (MySQL, PostgreSQL)
-### TOP = topo de resultados (SQL Server)
-
-🟥 Comandos de manipulação estrutural (DDL) — NUNCA via usuário:
-### DROP TABLE
-### ALTER TABLE
-### CREATE TABLE
-### ADD COLUMN
-### DROP COLUMN
+### 🟨 Comandos com verificação de segurança e executados no servidor:
+* DELETE FROM = deletar dados
+* UPDATE = atualizar dados
+* INSERT INTO = inserir dados
+* DROP TABLE = excluir tabela
+* ALTER TABLE = alterar estrutura
+* ADD COLUMN = adicionar coluna
+* DROP COLUMN = remover coluna
+* CREATE TABLE = criar tabela
+* PRIMARY KEY = chave primária
+* FOREIGN KEY = chave estrangeira
+* UNIQUE = valor único
+* CHECK = restrição
+* DEFAULT = valor padrão
+* INDEX = índice
+* VIEW = visão virtual
+* STORED PROCEDURE = procedimento armazenado
+* TRIGGER = gatilho
+* TRANSACTION = transação
+* COMMIT = confirmar
+* ROLLBACK = desfazer
+* SELECT = campos
+* FROM = tabela
+* WHERE = condição
+* GROUP BY = agrupar
+* HAVING = condição após agrupamento
+* ORDER BY = ordenar
+* JOIN = junção de tabelas
+* INNER JOIN = apenas correspondentes
+* LEFT JOIN = todos da esquerda
+* RIGHT JOIN = todos da direita
+* FULL OUTER JOIN = todos os registros de ambas
+* AS = apelido
+* COUNT = contar registros
+* SUM = somar valores
+* AVG = média
+* MIN = mínimo
+* MAX = máximo
+* DISTINCT = remover duplicados
+* LIKE = correspondência parcial
+* IN = pertence a lista
+* BETWEEN = intervalo
+* CASE = condicional
+* EXISTS = existência
+* NOT = negação
+* IS NULL / IS NOT NULL = nulo
+* LIMIT = limite de resultados (MySQL, PostgreSQL)
+* OFFSET = ignorar linhas (MySQL, PostgreSQL)
+* TOP = topo de resultados (SQL Server)
+  
+### 🟥 Comandos de manipulação estrutural (DDL) — NUNCA via usuário:
+* DROP TABLE
+* ALTER TABLE
+* CREATE TABLE
+* ADD COLUMN
+* DROP COLUMN
 
 Esses devem ser totalmente bloqueados em qualquer função pública.
 
