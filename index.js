@@ -1,3 +1,13 @@
+// CommonJS is a module system in JavaScript 
+// that uses `require()` to import modules 
+// and `module.exports` to export them.
+
+// Appwrite Function's code 
+// uses the CommonJS format. Appwrite's 
+// function runner is likely using 
+// require() under the hood, so the code
+// needs to be compatible with it.
+
 // ===================================
 // index.js (Correção)
 // ===================================
