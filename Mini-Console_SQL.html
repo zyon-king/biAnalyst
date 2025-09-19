@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini-Console SQL</title>
+    <style>
+        /* Estilo para garantir que o corpo ocupe toda a tela */
+        body {
+            font-family: monospace, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #282c34;
+            color: #abb2bf;
+        }
+        
+        /* Contêiner principal para as seções */
+        .container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Seção de Input - 20% da altura */
+        #input-area {
+            height: 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            border-bottom: 2px solid #3e4451;
+        }
+
+        #input-area form {
+            width: 80%;
+            max-width: 800px;
+            display: flex;
+        }
+
+        #command-input {
+            flex-grow: 1;
+            padding: 10px;
+            font-family: monospace;
+            background-color: #1e2127;
+            color: #abb2bf;
+            border: 1px solid #61afef;
+            outline: none;
+            font-size: 1rem;
+            border-radius: 4px;
+        }
+
+        #execute-btn {
+            padding: 10px 20px;
+            margin-left: 10px;
+            background-color: #56b6c2;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        /* Seção de Lista de Comandos - 20% da altura com efeito de rolagem */
+        #command-list-container {
+            height: 20%;
+            border-bottom: 2px solid #3e4451;
+            overflow-y: scroll;
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        
+        #command-list {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        #command-list li {
+            padding: 5px;
+            color: #98c379;
+        }
+
+        /* Seção de Resultados - O restante da altura */
+        #result-area {
+            flex-grow: 1;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        
+        #resultado {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-size: 1rem;
+        }
+    </style>
+    
+    <script type="module">
+        import { Client, Functions } from 'https://cdn.jsdelivr.net/npm/appwrite@20.0.0/dist/esm/sdk.js';
+
+        // 1. Configuração do cliente Appwrite
+        const client = new Client()
+            .setEndpoint('https://nyc.cloud.appwrite.io/v1')
+            .setProject('686a67d5003a1b4b1bf9');
+
+        const functions = new Functions(client);
+        const functionId = '68cd730500108dbf3959';
+        
+        // Elementos da página
+        const commandInput = document.getElementById('command-input');
+        const executeForm = document.getElementById('execute-form');
+        const resultadoElement = document.getElementById('resultado');
+
+        /**
+         * Executa uma ação na Appwrite Function e renderiza a resposta.
+         */
+        async function executarAcao(acao, parametros) {
+            const resultadoElement = document.getElementById('resultado');
+            resultadoElement.textContent = 'Executando comando...';
+
+            try {
+                const execution = await functions.createExecution(
+                    functionId,
+                    JSON.stringify({ acao, parametros }),
+                    false,
+                    '/'
+                );
+
+                const data = JSON.parse(execution.responseBody);
+
+                if (data.success) {
+                    // Verifica se a resposta é um array de objetos para renderizar uma tabela
+                    if (Array.isArray(data.data) && data.data.length > 0 && typeof data.data[0] === 'object') {
+                        renderTable(data.data);
+                    } else {
+                        // Se não for uma tabela, mostra o JSON original
+                        resultadoElement.textContent = JSON.stringify(data.data, null, 2);
+                    }
+                } else {
+                    resultadoElement.textContent = `Erro: ${data.message}`;
+                }
+            } catch (error) {
+                resultadoElement.textContent = `Erro de comunicação: ${error.message}`;
+            }
+        }
+
+        /**
+         * Converte os dados JSON em uma tabela HTML e a exibe.
+         * @param {Array<object>} data - O array de objetos retornado do Supabase.
+         */
+        function renderTable(data) {
+            const resultadoElement = document.getElementById('resultado');
+            const columns = Object.keys(data[0]);
+
+            let tableHTML = '<table>';
+
+            // Cria o cabeçalho da tabela
+            tableHTML += '<thead><tr>';
+            columns.forEach(column => {
+                tableHTML += `<th>${column}</th>`;
+            });
+            tableHTML += '</tr></thead>';
+
+            // Cria as linhas da tabela com os dados
+            tableHTML += '<tbody>';
+            data.forEach(row => {
+                tableHTML += '<tr>';
+                columns.forEach(column => {
+                    tableHTML += `<td>${row[column]}</td>`;
+                });
+                tableHTML += '</tr>';
+            });
+            tableHTML += '</tbody></table>';
+
+            // Exibe a tabela na área de resultados
+            resultadoElement.innerHTML = tableHTML;
+        }
+
+        // Listener para o formulário
+        executeForm.addEventListener('submit', (event) => {
+            event.preventDefault();
+
+            const fullCommand = commandInput.value.trim();
+
+            // Remove o ponto e vírgula opcional e converte o comando para maiúsculas para a verificação
+            const cleanCommand = fullCommand.replace(/;$/, '').toUpperCase();
+
+            // Lógica para analisar o comando digitado
+            if (cleanCommand === 'SELECT * FROM QUANTIDADES') {
+                executarAcao('buscar-tudo', { tabela: 'quantidades' });
+            } else if (cleanCommand === 'SELECT * FROM QUANTIDADES WHERE LOJA = "LOJA B"') {
+                executarAcao('buscar-por-loja', { loja: 'Loja B' });
+            } else {
+                // Exibe uma mensagem de erro se o comando não for reconhecido
+                resultadoElement.textContent = 'Comando não reconhecido ou sintaxe inválida.';
+            }
+        });
+    </script>
+</head>
+<body>
+    <div class="container">
+        
+        <div id="input-area">
+            <form id="execute-form">
+                <input type="text" id="command-input" placeholder="Digite seu comando SQL..." />
+                <button type="submit" id="execute-btn">Executar</button>
+            </form>
+        </div>
+
+        <div id="command-list-container">
+            <ul id="command-list">
+                <li>**SELECT** - Para buscar dados</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;SELECT * FROM tabela</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;SELECT * FROM tabela WHERE coluna = 'valor'</li>
+                <br>
+                <li>**INSERT INTO** - Para inserir dados</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;INSERT INTO tabela (col1, col2) VALUES ('val1', 'val2')</li>
+                <br>
+                <li>**UPDATE** - Para atualizar dados</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;UPDATE tabela SET coluna = 'novo_valor' WHERE condição</li>
+                <br>
+                <li>**DELETE FROM** - Para deletar dados</li>
+                <li>&nbsp;&nbsp;&nbsp;&nbsp;DELETE FROM tabela WHERE condição</li>
+            </ul>
+        </div>
+
+        <div id="result-area">
+            <pre id="resultado">Os resultados dos comandos serão exibidos aqui.</pre>
+        </div>
+
+    </div>
+</body>
+</html>
