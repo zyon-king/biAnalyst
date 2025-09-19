@@ -1,6 +1,6 @@
 
 ## Excel - Fórmulas Avançadas
-[PROCV (VLOOKUP)](#PROCV-(VLOOKUP))
+[PROCV (VLOOKUP)](#procv-vlookup)
 ### SOMASE
 ### ÍNDICE
 ### CORRESP
