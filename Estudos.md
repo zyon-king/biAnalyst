@@ -17,7 +17,7 @@
 * **TEXTJOIN**
 * **LET**
   
-[SQL](###SQL)
+[SQL](#SQL)
 * `SELECT`  
 * `FROM`  
 * `WHERE`  
@@ -45,11 +45,11 @@
 * `BETWEEN`  
 * `CASE`  
   
-* **Ferramentas de BI (Power BI/Tableau)**
-    * **DAX (Data Analysis Expressions)***
-    * **Conectar Excel, CSV, SQL Server, etc.***
-    * **Import***
-    * **DirectQuery***
+[Ferramentas de BI (Power BI/Tableau)](#ferramentas-de-bi-power-bitableau)
+* **DAX (Data Analysis Expressions)***
+* **Conectar Excel, CSV, SQL Server, etc.***
+* **Import***
+* **DirectQuery***
 
 * **Conceitos de ETL**
     * **Remover colunas***
@@ -91,7 +91,40 @@
 * **TEXTJOIN**
 * **LET**
 
-### SQL
+## SQL
+* `SELECT`  
+* `FROM`  
+* `WHERE`  
+* `GROUP BY`  
+* `HAVING`
+* `ORDER BY`  
+* `JOIN` e seus tipos: 
+   * `INNER JOIN`, 
+   * `LEFT JOIN`, 
+   * `RIGHT JOIN`, 
+   * `FULL OUTER JOIN`  
+* `AS` (para apelidos de colunas e tabelas)  
+* `UNION` e `UNION ALL`  
+* `INSERT INTO`  
+* `UPDATE`  
+* `DELETE FROM`  
+* `COUNT`  
+* `SUM`  
+* `AVG`  
+* `MIN`  
+* `MAX`  
+* `DISTINCT`  
+* `LIKE`  
+* `IN`  
+* `BETWEEN`  
+* `CASE`  
+
+## Ferramentas de BI (Power BI/Tableau))
+* **DAX (Data Analysis Expressions)***
+* **Conectar Excel, CSV, SQL Server, etc.***
+* **Import***
+* **DirectQuery***
+
 
 * **asd**
     * **asd*** 
