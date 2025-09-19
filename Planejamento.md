@@ -29,3 +29,15 @@ A última parte (await supabase.from('vendas').insert(...)) é a ação final.
 Como a função já validou os dados e o comando de inserção é fixo, 
 há a certeza de que está sendo inserindo apenas dados válidos e 
 nos campos corretos do seu banco de dados.
+
+🛡️ O que o HTML faz?
+Ele representa comandos SQL controlados via formulários seguros
+Cada formulário usa campos para preencher partes da query, sem permitir código SQL direto
+Os dados podem ser enviados para função Appwrite ou backend customizado
+
+🔒 Segurança no backend
+No servidor (função Appwrite):
+Verifique qual comando está sendo enviado (req.body.comando)
+Monte a SQL com segurança e parâmetros (nunca concatene strings diretamente)
+Execute somente os comandos permitidos e com validação
+Registre quem enviou (user ID) e quando
