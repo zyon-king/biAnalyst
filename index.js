@@ -12,6 +12,10 @@
 // index.js (Correção)
 // ===================================
 
+// ===================================
+// index.js (Appwrite Function com INSERT)
+// ===================================
+
 const { createClient } = require('@supabase/supabase-js');
 
 const supabase = createClient(
@@ -20,11 +24,11 @@ const supabase = createClient(
 );
 
 module.exports = async ({ req, res, log, error }) => {
-    // AQUI ESTÁ A CORREÇÃO: Analise o corpo da requisição
     const { acao, parametros } = JSON.parse(req.body);
 
     try {
         let resultado;
+        let dbError = null;
 
         switch (acao) {
             case 'buscar-tudo':
@@ -33,7 +37,7 @@ module.exports = async ({ req, res, log, error }) => {
                     .from(tabela)
                     .select('*');
                 
-                if (selectError) throw selectError;
+                dbError = selectError;
                 resultado = data;
                 break;
 
@@ -44,13 +48,37 @@ module.exports = async ({ req, res, log, error }) => {
                     .select('*')
                     .eq('Loja', loja);
                 
-                if (selectError2) throw selectError2;
+                dbError = selectError2;
                 resultado = data2;
                 break;
 
+            // -- NOVO: Adiciona um novo registro na tabela 'quantidades' --
+            case 'adicionar-quantidade':
+                const { Produto, Quantia, Loja } = parametros;
+                const { data: insertData, error: insertError } = await supabase
+                    .from('quantidades')
+                    .insert({ Produto, Quantia, Loja });
+
+                dbError = insertError;
+                resultado = insertData;
+                break;
+            
+            // -- NOVO: Adiciona um novo registro na tabela 'vendas' --
+            case 'adicionar-venda':
+                const { Produto: prodVenda, Valor, Loja: lojaVenda } = parametros;
+                const { data: insertVendaData, error: insertVendaError } = await supabase
+                    .from('vendas')
+                    .insert({ Produto: prodVenda, Valor, Loja: lojaVenda });
+                
+                dbError = insertVendaError;
+                resultado = insertVendaData;
+                break;
+            
             default:
                 return res.json({ success: false, message: 'Ação não reconhecida.' }, 400);
         }
+
+        if (dbError) throw dbError;
 
         return res.json({ success: true, data: resultado });
 
