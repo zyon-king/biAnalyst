@@ -1,3 +1,5 @@
+A ideia não é permitir digitação de SQL bruto, mas sim montar interfaces que representam os comandos SQL de forma segura.
+
 Extração de Dados:
 
 As primeiras linhas (const produto = req.body.produto; etc.) 
