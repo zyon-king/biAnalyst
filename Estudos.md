@@ -87,18 +87,18 @@
 ---
 
 ## Excel - Fórmulas Avançadas
-## SOMASE
-## ÍNDICE
-## CORRESP
-## XLOOKUP
-## FILTER
-## SORT
-## UNIQUE
-## SUMIFS
-## COUNTIFS
-## IFS
-## TEXTJOIN
-## LET
+### SOMASE
+### ÍNDICE
+### CORRESP
+### XLOOKUP
+### FILTER
+### SORT
+### UNIQUE
+### SUMIFS
+### COUNTIFS
+### IFS
+### TEXTJOIN
+### LET
 
 ---
 
@@ -114,21 +114,21 @@
 #### LEFT JOIN
 #### RIGHT JOIN
 #### FULL OUTER JOIN
-## AS (para apelidos de colunas e tabelas)
-## UNION e UNION ALL
-## INSERT INTO
-## UPDATE
-## DELETE FROM
-## COUNT
-## SUM
-## AVG
-## MIN
-## MAX
-## DISTINCT
-## LIKE
-## IN
-## BETWEEN
-## CASE
+### AS (para apelidos de colunas e tabelas)
+### UNION e UNION ALL
+### INSERT INTO
+### UPDATE
+### DELETE FROM
+### COUNT
+### SUM
+### AVG
+### MIN
+### MAX
+### DISTINCT
+### LIKE
+### IN
+### BETWEEN
+### CASE
 
 ---
 
@@ -140,7 +140,7 @@
 
 ---
 
-### Conceitos de ETL
+## Conceitos de ETL
 ### Remover colunas
 ### Alterar tipos de dados
 ### Merge Queries
