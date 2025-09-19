@@ -70,13 +70,13 @@ A ideia não é permitir digitação de SQL sem verificação de segurança, mas
 
 Exemplo: `INSERT INTO produtos (produto, qtd, loja) VALUES ('Manga', 12, 'Loja A');`
 
-**No backend (Função Appwrite) - O Risco de SQL Injection**
+**⚠️ Aviso EmojiNo backend (Função Appwrite) - O Risco de SQL Injection**
 
 Se a Appwrite Function simplesmente pegar a string do usuário (`SELECT * FROM produtos`) e executá-la diretamente no Supabase, um usuário mal-intencionado poderia enviar comandos como `SELECT * FROM produtos; DROP TABLE vendas;` e excluir a sua tabela de vendas.
 
 Mesmo que filtrando comandos como `DROP`, um hacker pode usar truques mais complexos para burlar a verificação.
 
-**A Solução Segura**
+**🧠 A Solução Segura**
 
 A função no servidor **NÃO** deve executar o comando SQL que o usuário digitou. Em vez disso, ela deve analisar o comando do usuário e construir uma nova consulta segura.
 
