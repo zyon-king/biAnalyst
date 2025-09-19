@@ -1,20 +1,17 @@
 // ===================================
-// index.js (APENAS PARA APRENDIZADO - CommonJS)
+// index.js (Correção)
 // ===================================
 
-// Use require() para importar a biblioteca do Supabase
 const { createClient } = require('@supabase/supabase-js');
 
-// Conexão com o Supabase (usando variáveis de ambiente)
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
 
-// Use module.exports para exportar a função principal
 module.exports = async ({ req, res, log, error }) => {
-    // A Appwrite Function fornece o body já parseado
-    const { acao, parametros } = req.body;
+    // AQUI ESTÁ A CORREÇÃO: Analise o corpo da requisição
+    const { acao, parametros } = JSON.parse(req.body);
 
     try {
         let resultado;
