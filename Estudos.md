@@ -453,6 +453,21 @@ Define variáveis nomeadas para uso em uma fórmula.
 
 ---
 
+| Produto | Qtd |   Loja  |
+|---------|-----|---------|
+| Uva     |  10 |  Loja A |
+| Goiaba  |   5 |  Loja B |
+| Laranja |   8 |  Loja B |
+
+| Produto |  Valor |   Loja  |
+|---------|--------|---------|
+| Uva     | 100,00 |  Loja A |
+| Goiaba  |  50,00 |  Loja B |
+| Laranja |  80,00 |  Loja B |
+
+
+---
+
 ## Ferramentas de BI (Power BI/Tableau))
 ### DAX (Data Analysis Expressions)
 ### Conectar Excel, CSV, SQL Server, etc.
