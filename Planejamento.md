@@ -12,7 +12,7 @@ Introdução
 
 * 🔐 **Segurança total no backend** — nada é executado diretamente no navegador.
 * 🧩 **Flexibilidade máxima** — o usuário pode enviar qualquer comando permitido.
-* 🧠 **Fácil de manter e expandir** — comandos, mensagens, logs e permissões controladas centralmente.
+* 🔰 **Fácil de manter e expandir** — comandos, mensagens, logs e permissões controladas centralmente.
 * 🚀 **Experiência fluida** — o usuário vê imediatamente o efeito de suas ações.
 
 ## 👷 Segurança no backend
