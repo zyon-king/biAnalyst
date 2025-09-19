@@ -2,7 +2,7 @@
 ## Excel - Fórmulas Avançadas
 [🔗 PROCV (VLOOKUP)](#procv-vlookup)
 [🔗 SOMASE](#somase)  
-[🔗 ÍNDICE](#índice)  
+[🔗 ÍNDICE](#index)  
 [🔗 CORRESP](#corresp)  
 [🔗 XLOOKUP](#xlookup)  
 [🔗 FILTER](#filter)  
@@ -34,7 +34,7 @@ Procura um valor na primeira coluna e retorna um valor de outra coluna na mesma 
 
 ---
 
-## SOMASE (SUMIF)
+## SUMIF
 
 Soma valores com base em um critério.
 
@@ -52,7 +52,7 @@ Soma valores com base em um critério.
 
 ---
 
-## ÍNDICE (INDEX)
+## INDEX
 
 Retorna o valor em uma célula específica dentro de um intervalo.
 
@@ -70,7 +70,7 @@ Retorna o valor em uma célula específica dentro de um intervalo.
 
 ---
 
-## CORRESP (MATCH)
+## CORRESP
 
 Retorna a posição de um valor em um intervalo.
 
