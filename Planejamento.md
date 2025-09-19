@@ -1,4 +1,21 @@
-# 👷 Segurança no backend
+## 📜 Planejamento
+
+Introdução
+
+> - A página mantém no JavaScript uma lista dos comandos permitidos.  
+> - O usuário digita os comandos SQL em um único campo de texto.  
+> - Esses comandos são enviados para uma função no servidor (Appwrite), que valida a segurança.  
+> - Se o comando for seguro, a função executa o SQL no Supabase.  
+> - A página então exibe o resultado, seja a tabela consultada ou uma mensagem de confirmação.  
+
+## ✅ Vantagens desse modelo
+
+* 🔐 **Segurança total no backend** — nada é executado diretamente no navegador.
+* 🧩 **Flexibilidade máxima** — o usuário pode enviar qualquer comando permitido.
+* 🧠 **Fácil de manter e expandir** — comandos, mensagens, logs e permissões controladas centralmente.
+* 🚀 **Experiência fluida** — o usuário vê imediatamente o efeito de suas ações.
+
+## 👷 Segurança no backend
 
 A ideia não é permitir digitação de SQL sem verificação de segurança, mas sim montar interfaces que apenas representam os comandos SQL de forma segura, mas os comandos serão gerados realmente no servidor e não pelo usuário.
 
@@ -84,21 +101,21 @@ A ideia não é permitir digitação de SQL sem verificação de segurança, mas
 
 Esses devem ser totalmente bloqueados em qualquer função pública.
 
-# ✅ Estrutura proposta
+## ✅ Estrutura proposta
 
-## Input tipo terminal
+### Input tipo terminal
 
 * Aparência de terminal SQL
 * Ocupa 100% da largura e 30% da altura visível
 * Usuário digita comandos SQL diretamente (ex: `SELECT * FROM produtos`)
 
-## Área de saída (resposta)
+### Área de saída (resposta)
 
 * Exibe a tabela resultante se for uma consulta (`SELECT`)
 * Exibe mensagens de status se for comando de escrita (`INSERT`, `UPDATE`, etc.)
 * Atualiza dinamicamente conforme o comando enviado e a resposta do Supabase
 
-# 🧠 Benefícios
+### 🧠 Benefícios
 
 * 💡 **UX moderna**: Parece um mini-console SQL direto na web.
 * 📦 **Compacto e versátil**: Um único input pode lidar com toda a aplicação.
@@ -106,13 +123,13 @@ Esses devem ser totalmente bloqueados em qualquer função pública.
 * 🔄 **Resposta dinâmica**: A mesma área mostra resultados ou confirmações.
 * ⚙️ **Escalável**: Pode incluir histórico, autocomplete, múltiplas abas etc.
 
-# ⚙️ Comportamento esperado
+## ⚙️ Comportamento esperado
 
-## Usuário envia comando de escrita
+### Usuário envia comando de escrita
 
 Exemplo: `INSERT INTO produtos (produto, qtd, loja) VALUES ('Manga', 12, 'Loja A');`
 
-## No backend (Função Appwrite)
+### No backend (Função Appwrite)
 
 1. **Valida se o comando é seguro**: Verifica se o comando não é perigoso (ex: não é um `DROP TABLE`, etc.)
 2. **Executa o comando no Supabase**: Roda o comando validado no banco de dados
@@ -121,7 +138,7 @@ Exemplo: `INSERT INTO produtos (produto, qtd, loja) VALUES ('Manga', 12, 'Loja A
    * **Executa automaticamente um**: `SELECT * FROM produtos;`
    * **Retorna os dados atualizados**
 
-## No frontend
+### No frontend
 
 * **Exibe a mensagem de sucesso**: `✅ Produto inserido com sucesso.`
 * **Exibe os dados atualizados**:
@@ -133,7 +150,7 @@ Exemplo: `INSERT INTO produtos (produto, qtd, loja) VALUES ('Manga', 12, 'Loja A
 | Laranja | 8   | Loja B |
 | Manga   | 12  | Loja A |
 
-# ✅ Vantagens dessa abordagem
+## ✅ Vantagens dessa abordagem
 
 * **Efeito imediato**: O usuário vê o resultado de cada comando instantaneamente.
 * **Segurança centralizada**: A função Appwrite mantém a integridade e segurança dos comandos.
