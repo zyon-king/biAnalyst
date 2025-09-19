@@ -509,3 +509,698 @@ Desfaz todas as alterações feitas em uma transação, retornando o banco de da
 
 (A atualização da 'Uva' é desfeita, e o valor original é restaurado)
   
+---
+
+[Menu](#SQL)
+
+## SELECT
+
+Seleciona colunas específicas para exibir no resultado da consulta.
+
+
+
+| id | Produto | Quantia | Loja |
+|----|---------|---------|------|
+| 1  | Maçã    | 10      | Loja A |
+| 2  | Banana  | 5       | Loja B |
+
+`SELECT Produto, Quantia FROM quantidades;`
+
+
+**Retorna:**
+
+| Produto | Quantia |
+|---------|---------|
+| Maçã    | 10      |
+| Banana  | 5       |
+
+---
+
+[Menu](#SQL)
+
+## FROM
+
+Especifica de qual tabela os dados serão buscados na consulta.
+
+
+
+(Tabela 'quantidades')
+| Produto | Quantia |
+|---------|---------|
+| Maçã    | 10      |
+| Banana  | 5       |
+
+`SELECT * FROM quantidades;`
+
+
+**Retorna:**
+
+| Produto | Quantia |
+|---------|---------|
+| Maçã    | 10      |
+| Banana  | 5       |
+
+---
+
+[Menu](#SQL)
+
+## WHERE
+
+Filtra os registros (linhas) para que apenas aqueles que satisfazem uma condição específica sejam retornados.
+
+
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+| Cenoura | 25      | Loja A |
+
+`SELECT * FROM quantidades WHERE Loja = 'Loja A';`
+
+
+**Retorna:**
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Cenoura | 25      | Loja A |
+
+---
+
+[Menu](#SQL)
+
+## GROUP BY
+
+Agrupa linhas que têm valores idênticos em colunas específicas, frequentemente usado com funções de agregação (SUM, AVG, COUNT, etc.).
+
+| Produto | Quantia |
+|---------|---------|
+| Maçã    | 10      |
+| Maçã    | 5       |
+| Banana  | 8       |
+
+`SELECT Produto, SUM(Quantia) FROM quantidades GROUP BY Produto;`
+
+
+**Retorna:**
+
+| Produto | SUM(Quantia) |
+|---------|--------------|
+| Maçã    | 15           |
+| Banana  | 8            |
+
+---
+
+[Menu](#SQL)
+
+## HAVING
+
+Filtra grupos de linhas, criados pelo `GROUP BY`, com base em uma condição.
+
+| Produto | SUM(Quantia) |
+|---------|--------------|
+| Maçã    | 15           |
+| Banana  | 8            |
+
+`SELECT Produto, SUM(Quantia) FROM quantidades GROUP BY Produto HAVING SUM(Quantia) > 10;`
+
+
+**Retorna:**
+
+| Produto | SUM(Quantia) |
+|---------|--------------|
+| Maçã    | 15           |
+
+---
+
+[Menu](#SQL)
+
+## ORDER BY
+
+Ordena o conjunto de resultados em ordem crescente (ASC) ou decrescente (DESC) com base em uma ou mais colunas.
+
+| Produto | Quantia |
+|---------|---------|
+| Maçã    | 10      |
+| Banana  | 5       |
+| Cenoura | 25      |
+
+`SELECT * FROM quantidades ORDER BY Quantia ASC;`
+
+
+**Retorna:**
+
+| Produto | Quantia |
+|---------|---------|
+| Banana  | 5       |
+| Maçã    | 10      |
+| Cenoura | 25      |
+
+---
+
+[Menu](#SQL)
+
+## JOIN
+
+Combina linhas de duas ou mais tabelas com base em uma coluna relacionada entre elas.
+
+**quantidades**
+| Produto  | fornecedor_id |
+|----------|---------------|
+| Maçã     | 1             |
+| Banana   | 2             |
+
+**fornecedores**
+| id | nome         |
+|----|--------------|
+| 1  | Fornecedor A |
+| 2  | Fornecedor B |
+
+`SELECT Produto, nome FROM quantidades JOIN fornecedores ON quantidades.fornecedor_id = fornecedores.id;`
+
+
+**Retorna:**
+
+| Produto | nome         |
+|---------|--------------|
+| Maçã    | Fornecedor A |
+| Banana  | Fornecedor B |
+
+---
+
+[Menu](#SQL)
+
+## INNER JOIN
+
+Retorna apenas os registros que possuem correspondência em ambas as tabelas (junção interna).
+
+**quantidades**
+| Produto | fornecedor_id |
+|---------|---------------|
+| Maçã    | 1             |
+| Abacaxi | 3             |
+
+**fornecedores**
+| id | nome         |
+|----|--------------|
+| 1  | Fornecedor A |
+| 2  | Fornecedor B |
+
+`SELECT Produto, nome FROM quantidades INNER JOIN fornecedores ON quantidades.fornecedor_id = fornecedores.id;`
+
+
+**Retorna:**
+
+| Produto | nome         |
+|---------|--------------|
+| Maçã    | Fornecedor A |
+
+---
+
+[Menu](#SQL)
+
+## LEFT JOIN
+
+Retorna todos os registros da tabela da esquerda, e os registros correspondentes da tabela da direita.
+
+**quantidades (Tabela da esquerda)**
+| Produto | fornecedor_id |
+|---------|---------------|
+| Maçã    | 1             |
+| Abacaxi | 3             |
+
+**fornecedores (Tabela da direita)**
+| id | nome         |
+|----|--------------|
+| 1  | Fornecedor A |
+| 2  | Fornecedor B |
+
+`SELECT Produto, nome FROM quantidades LEFT JOIN fornecedores ON quantidades.fornecedor_id = fornecedores.id;`
+
+
+**Retorna:**
+
+| Produto | nome         |
+|---------|--------------|
+| Maçã    | Fornecedor A |
+| Abacaxi | NULL         |
+
+---
+
+[Menu](#SQL)
+
+## RIGHT JOIN
+
+Retorna todos os registros da tabela da direita, e os registros correspondentes da tabela da esquerda.
+
+**quantidades (Tabela da esquerda)**
+| Produto | fornecedor_id |
+|---------|---------------|
+| Maçã    | 1             |
+| Abacaxi | 3             |
+
+**fornecedores (Tabela da direita)**
+| id | nome         |
+|----|--------------|
+| 1  | Fornecedor A |
+| 2  | Fornecedor B |
+
+`SELECT Produto, nome FROM quantidades RIGHT JOIN fornecedores ON quantidades.fornecedor_id = fornecedores.id;`
+
+**Retorna:**
+
+| Produto | nome         |
+|---------|--------------|
+| Maçã    | Fornecedor A |
+| NULL    | Fornecedor B |
+
+---
+
+[Menu](#SQL)
+
+## FULL OUTER JOIN
+
+Combina registros de duas tabelas, retornando todos os registros correspondentes e os registros sem correspondência de ambas as tabelas.
+
+**tabela: quantidades**
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+
+**tabela: vendas_loja**
+| Produto | Loja   | Vendas |
+|---------|--------|--------|
+| Maçã    | Loja A | 8      |
+| Uva     | Loja A | 12     |
+
+`SELECT * FROM quantidades FULL OUTER JOIN vendas_loja ON quantidades.Produto = vendas_loja.Produto;`
+
+**Retorna:**
+
+| Produto | Quantia | Loja_quantidades | Produto_vendas | Loja_vendas | Vendas |
+|---------|---------|------------------|----------------|-------------|--------|
+| Maçã    | 10      | Loja A           | Maçã           | Loja A      | 8      |
+| Banana  | 5       | Loja B           | NULL           | NULL        | NULL   |
+| NULL    | NULL    | NULL             | Uva            | Loja A      | 12     |
+
+---
+
+[Menu](#SQL)
+
+## AS
+
+Cria um apelido temporário para uma coluna ou tabela em uma consulta.
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+
+`SELECT Produto AS Item, Quantia AS Estoque FROM quantidades;`
+
+**Retorna:**
+
+| Item   | Estoque |
+|--------|---------|
+| Maçã   | 10      |
+| Banana | 5       |
+
+---
+
+[Menu](#SQL)
+
+## COUNT
+
+Conta o número de linhas que correspondem a uma condição especificada.
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+
+`SELECT COUNT(Produto) FROM quantidades;`
+
+**Retorna:**
+
+| COUNT(Produto) |
+|----------------|
+| 2              |
+
+---
+
+[Menu](#SQL)
+
+## SUM
+
+Calcula a soma de todos os valores em uma coluna numérica.
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+
+`SELECT SUM(Quantia) FROM quantidades;`
+
+**Retorna:**
+
+| SUM(Quantia) |
+|--------------|
+| 15           |
+
+---
+
+[Menu](#SQL)
+
+## AVG
+
+Calcula a média de todos os valores em uma coluna numérica.
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+
+`SELECT AVG(Quantia) FROM quantidades;`
+
+**Retorna:**
+
+| AVG(Quantia) |
+|--------------|
+| 7.5          |
+
+---
+
+[Menu](#SQL)
+
+## MIN
+
+Encontra o valor mínimo em uma coluna selecionada.
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+
+`SELECT MIN(Quantia) FROM quantidades;`
+
+**Retorna:**
+
+| MIN(Quantia) |
+|--------------|
+| 5            |
+
+---
+
+[Menu](#SQL)
+
+## MAX
+
+Encontra o valor máximo em uma coluna selecionada.
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+
+`SELECT MAX(Quantia) FROM quantidades;`
+
+**Retorna:**
+
+| MAX(Quantia) |
+|--------------|
+| 10           |
+
+---
+
+[Menu](#SQL)
+
+## DISTINCT
+
+Remove valores duplicados de uma coluna no resultado da consulta.
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+| Maçã    | 8       | Loja B |
+
+`SELECT DISTINCT Produto FROM quantidades;`
+
+**Retorna:**
+
+| Produto |
+|---------|
+| Maçã    |
+| Banana  |
+
+---
+
+[Menu](#SQL)
+
+## LIKE
+
+Usado na cláusula `WHERE` para encontrar padrões em dados.
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+| Manga   | 8       | Loja B |
+
+`SELECT * FROM quantidades WHERE Produto LIKE 'Ma%';`
+
+**Retorna:**
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Manga   | 8       | Loja B |
+
+---
+
+[Menu](#SQL)
+
+## IN
+
+Usado na cláusula `WHERE` para especificar múltiplos valores possíveis para uma coluna.
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Banana  | 5       | Loja B |
+| Abacate | 12      | Loja C |
+
+`SELECT * FROM quantidades WHERE Loja IN ('Loja A', 'Loja C');`
+
+**Retorna:**
+
+| Produto | Quantia | Loja   |
+|---------|---------|--------|
+| Maçã    | 10      | Loja A |
+| Abacate | 12      | Loja C |
+
+---
+
+[Menu](#SQL)
+
+## BETWEEN
+
+Seleciona valores dentro de um intervalo.
+
+**vendas**
+| id | venda | data |
+|----|-------|------|
+| 1  | 150.00| 2024 |
+| 2  | 50.00 | 2024 |
+| 3  | 200.00| 2024 |
+| 4  | 250.00| 2024 |
+
+`SELECT * FROM vendas WHERE venda BETWEEN 100.00 AND 200.00;`
+
+
+**Retorna:**
+
+| id | venda | data |
+|----|-------|------|
+| 1  | 150.00| 2024 |
+| 3  | 200.00| 2024 |
+
+---
+
+[Menu](#SQL)
+
+## CASE
+
+Cria lógicas condicionais para retornar valores diferentes.
+
+**quantidades**
+| Produto | Quantia |
+|---------|---------|
+| Maçã    | 12      |
+| Banana  | 5       |
+| Pera    | 20      |
+
+`SELECT Produto, CASE WHEN Quantia > 10 THEN 'Em Estoque' ELSE 'Baixo Estoque' END AS Status FROM quantidades;`
+
+
+**Retorna:**
+
+| Produto | Status |
+|---------|----------------|
+| Maçã    | Em Estoque     |
+| Banana  | Baixo Estoque  |
+| Pera    | Em Estoque     |
+
+---
+
+[Menu](#SQL)
+
+## EXISTS
+
+Verifica se uma subconsulta retorna algum registro, otimizando a checagem de existência.
+
+**Tabelas**
+**pedidos**
+| id_pedido | produto |
+|-----------|---------|
+| 101       | Maçã    |
+| 102       | Banana  |
+
+**quantidades**
+| produto | loja |
+|---------|------|
+| Maçã    | Loja A |
+| Banana  | Loja B |
+| Pera    | Loja C |
+
+`SELECT * FROM quantidades WHERE EXISTS (SELECT 1 FROM pedidos WHERE pedidos.produto = quantidades.produto);`
+
+**Retorna:**
+
+| produto | loja |
+|---------|------|
+| Maçã    | Loja A |
+| Banana  | Loja B |
+
+---
+
+[Menu](#SQL)
+
+## NOT
+
+Nega uma condição, retornando registros que não a satisfazem.
+
+**Tabela de produtos**
+| produto | disponivel |
+|---------|------------|
+| Maçã    | true       |
+| Banana  | false      |
+| Pera    | true       |
+
+`SELECT * FROM produtos WHERE NOT disponivel;`
+
+**Retorna:**
+
+| produto | disponivel |
+|---------|------------|
+| Banana  | false      |
+
+---
+
+[Menu](#SQL)
+
+## IS NULL / IS NOT NULL
+
+Testa se o valor de uma coluna é nulo (ausente) ou não é nulo.
+
+**contatos**
+| nome  | telefone | email |
+|-------|----------|-------|
+| Ana   | 111-111  | null  |
+| João  | 222-222  | joao@ |
+| Pedro | null     | null  |
+
+`SELECT nome FROM contatos WHERE telefone IS NULL;`
+
+**Retorna:**
+
+| nome  |
+|-------|
+| Pedro |
+
+---
+
+[Menu](#SQL)
+
+## LIMIT
+
+Limita o número de registros retornados por uma consulta, útil para paginação.
+
+**vendas**
+| id | valor |
+|----|-------|
+| 1  | 150   |
+| 2  | 200   |
+| 3  | 120   |
+| 4  | 250   |
+
+`SELECT * FROM vendas ORDER BY valor DESC LIMIT 2;`
+
+**Retorna:**
+
+| id | valor |
+|----|-------|
+| 4  | 250   |
+| 2  | 200   |
+
+---
+
+[Menu](#SQL)
+
+## OFFSET
+
+Pula um número de registros antes de iniciar a contagem do `LIMIT`, útil para paginação.
+
+**vendas**
+| id | valor |
+|----|-------|
+| 1  | 150   |
+| 2  | 200   |
+| 3  | 120   |
+| 4  | 250   |
+
+`SELECT * FROM vendas ORDER BY valor DESC LIMIT 2 OFFSET 1;`
+
+**Retorna:**
+
+| id | valor |
+|----|-------|
+| 2  | 200   |
+| 1  | 150   |
+
+---
+
+[Menu](#SQL)
+
+## TOP
+
+Retorna um número específico de registros de um conjunto (Sintaxe do SQL Server).
+
+**vendas**
+| id | valor |
+|----|-------|
+| 1  | 150   |
+| 2  | 200   |
+| 3  | 120   |
+| 4  | 250   |
+
+`SELECT TOP 2 * FROM vendas ORDER BY valor DESC;`
+
+**Retorna:**
+
+| id | valor |
+|----|-------|
+| 4  | 250   |
+| 2  | 200   |
