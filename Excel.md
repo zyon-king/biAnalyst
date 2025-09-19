@@ -16,6 +16,8 @@
 
 ---
 
+[Menu](#excel---fórmulas-avançadas)
+
 ## PROCV (VLOOKUP)
 
 Procura um valor na primeira coluna e retorna um valor de outra coluna na mesma linha.
@@ -35,6 +37,8 @@ Procura um valor na primeira coluna e retorna um valor de outra coluna na mesma 
 
 ---
 
+[Menu](#excel---fórmulas-avançadas)
+
 ## SUMIF
 
 Soma valores com base em um critério.
@@ -52,6 +56,8 @@ Soma valores com base em um critério.
 **Retorna:** 18
 
 ---
+
+[Menu](#excel---fórmulas-avançadas)
 
 ## INDEX
 
@@ -71,6 +77,8 @@ Retorna o valor em uma célula específica dentro de um intervalo.
 
 ---
 
+[Menu](#excel---fórmulas-avançadas)
+
 ## CORRESP
 
 Retorna a posição de um valor em um intervalo.
@@ -88,6 +96,8 @@ Retorna a posição de um valor em um intervalo.
 **Retorna:** 2
 
 ---
+
+[Menu](#excel---fórmulas-avançadas)
 
 ## XLOOKUP
 
@@ -107,6 +117,7 @@ Procura um valor em uma coluna e retorna o correspondente em outra.
 
 ---
 
+[Menu](#excel---fórmulas-avançadas)
 ## FILTER
 
 Filtra dados com base em um critério.
@@ -129,6 +140,8 @@ Filtra dados com base em um critério.
 | Maçã    | 8       |
 
 ---
+
+[Menu](#excel---fórmulas-avançadas)
 
 ## SORT
 
@@ -154,6 +167,8 @@ Ordena uma matriz.
 
 ---
 
+[Menu](#excel---fórmulas-avançadas)
+
 ## UNIQUE
 
 Retorna valores únicos de um intervalo.
@@ -177,6 +192,8 @@ Retorna valores únicos de um intervalo.
 
 ---
 
+[Menu](#excel---fórmulas-avançadas)
+
 ## SUMIFS
 
 Soma valores com múltiplos critérios.
@@ -194,6 +211,8 @@ Soma valores com múltiplos critérios.
 **Retorna:** 8
 
 ---
+
+[Menu](#excel---fórmulas-avançadas)
 
 ## COUNTIFS
 
@@ -213,6 +232,8 @@ Conta quantas linhas atendem múltiplos critérios.
 
 ---
 
+[Menu](#excel---fórmulas-avançadas)
+
 ## IFS
 
 Testa múltiplas condições e retorna o primeiro resultado verdadeiro.
@@ -230,6 +251,8 @@ Testa múltiplas condições e retorna o primeiro resultado verdadeiro.
 **Retorna (para B2=10):** Médio
 
 ---
+
+[Menu](#excel---fórmulas-avançadas)
 
 ## TEXTJOIN
 
@@ -249,6 +272,8 @@ Une textos com separador, ignorando vazios.
 
 ---
 
+[Menu](#excel---fórmulas-avançadas)
+
 ## LET
 
 Define variáveis nomeadas para uso em uma fórmula.
@@ -262,9 +287,5 @@ Define variáveis nomeadas para uso em uma fórmula.
 ```excel
 =LET(x; 5; y; 10; x+y)
 ```
-
-[Excel - Fórmulas Avançadas](#excel---fórmulas-avançadas)
-
-
 **Retorna:** 15
----
+
