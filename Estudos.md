@@ -452,7 +452,9 @@ Define variáveis nomeadas para uso em uma fórmula.
 ### ROLLBACK = desfazer  
 
 ---
-
+>Criação de Supabase Tables com Sql Editor.
+>Deploy AppWrite Function integrada com Github usando  package.json para a Fx e Node.js para o Encript.
+>Pagina do usuario com um form para cada tabela.
 | Produto | Qtd |   Loja  |
 |---------|-----|---------|
 | Uva     |  10 |  Loja A |
