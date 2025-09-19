@@ -1,8 +1,9 @@
 // ===================================
-// index.js (APENAS PARA APRENDIZADO)
+// index.js (APENAS PARA APRENDIZADO - CommonJS)
 // ===================================
 
-import { createClient } from '@supabase/supabase-js';
+// Use require() para importar a biblioteca do Supabase
+const { createClient } = require('@supabase/supabase-js');
 
 // Conexão com o Supabase (usando variáveis de ambiente)
 const supabase = createClient(
@@ -10,11 +11,11 @@ const supabase = createClient(
   process.env.SUPABASE_KEY
 );
 
+// Use module.exports para exportar a função principal
 module.exports = async ({ req, res, log, error }) => {
-    // 1. Recebe a requisição com a ação e os parâmetros
-    const { acao, parametros } = JSON.parse(req.body);
+    // A Appwrite Function fornece o body já parseado
+    const { acao, parametros } = req.body;
 
-    // 2. Executa a ação segura com base na requisição
     try {
         let resultado;
 
@@ -39,8 +40,6 @@ module.exports = async ({ req, res, log, error }) => {
                 if (selectError2) throw selectError2;
                 resultado = data2;
                 break;
-
-            // ... Você pode adicionar mais casos aqui para outras ações ...
 
             default:
                 return res.json({ success: false, message: 'Ação não reconhecida.' }, 400);
