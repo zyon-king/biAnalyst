@@ -4,26 +4,26 @@ Nome do comando:
 ## DELETE FROM
 
 Código do comando:
-`DELETE FROM quantidades`  
+`DELETE FROM quantidades`
 `WHERE Produto = 'Maçã' AND Loja = 'Loja A';`
 
 Exemplo do comando:
 Remove registros de uma tabela que atendem a uma condição específica.
 
-|   |    A     |    B      |   C    |
-|---|----------|-----------|--------|
+|   |    A     |     B     |  C    |
+|---|----------|-----------|-------|
 |1| **Produto**|**Quantia**|**Loja**|
-|3| Maçã       | 10        | Loja A |
-|4| Banana     | 5         | Loja B |
-|5| Maçã       | 8         | Loja B |
+|3| Maçã      | 10        | Loja A |
+|4| Banana    | 5         | Loja B |
+|5| Maçã      | 8         | Loja B |
 
 **Retorna:**
 
-|   |    A     |    B      |   C    |
-|---|----------|-----------|--------|
+|   |    A     |     B     |  C    |
+|---|----------|-----------|-------|
 |1| **Produto**|**Quantia**|**Loja**|
-|4| Banana     | 5         | Loja B |
-|5| Maçã       | 8         | Loja B |
+|4| Banana    | 5         | Loja B |
+|5| Maçã      | 8         | Loja B |
 
 ---
 
