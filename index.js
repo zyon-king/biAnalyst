@@ -9,27 +9,28 @@
 // needs to be compatible with it.
 
 // ===================================
-// index.js (Correção)
-// ===================================
-// ===================================
-// index.js (Appwrite Function Corrigida)
+// index.js (Appwrite Function - CommonJS)
 // ===================================
 
+// Importa a biblioteca do Supabase
 const { createClient } = require('@supabase/supabase-js');
 
+// Conecta ao Supabase usando variáveis de ambiente seguras
 const supabase = createClient(
   process.env.SUPABASE_URL,
   process.env.SUPABASE_KEY
 );
 
+// Exporta a função principal que o Appwrite vai executar
 module.exports = async ({ req, res, log, error }) => {
-    // AQUI ESTÁ A CORREÇÃO: Analise o corpo da requisição
+    // Analisa o corpo da requisição que é enviado como uma string JSON
     const { acao, parametros } = JSON.parse(req.body);
 
     try {
         let resultado;
         let dbError = null;
 
+        // Usa um "switch" para decidir qual ação executar com base no que foi enviado
         switch (acao) {
             case 'buscar-tudo':
                 const { tabela } = parametros;
@@ -73,15 +74,20 @@ module.exports = async ({ req, res, log, error }) => {
                 break;
             
             default:
+                // Retorna um erro se a ação não for reconhecida
                 return res.json({ success: false, message: 'Ação não reconhecida.' }, 400);
         }
 
+        // Se houver um erro no banco de dados, lança o erro para o catch
         if (dbError) throw dbError;
 
+        // Retorna o resultado com sucesso
         return res.json({ success: true, data: resultado });
 
     } catch (e) {
+        // Loga o erro para depuração
         log(e);
+        // Retorna uma resposta de erro para a página web
         return res.json({ success: false, message: e.message }, 500);
     }
 };
