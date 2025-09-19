@@ -26,6 +26,30 @@ FRT (First Reply Time)
 
 Tempo Médio de Espera (TME)
 
+ABS (Absenteeism), faltas do dia ou ausencia em horas (justificadas ou não).
+
+HT / TMA (Handle Time / Tempo Médio de Atendimento), tempo de ligação relacionado com quantidade de ligações. 
+
+Aderência (Adherence), programação prevista de horários relacionada com programação cumprida de horários.
+
+ACW / TMO (After Call Work), tempo na ligação mais tempo de tabulação após encerrar a ligação.
+
+QA (Quality Assurance), relação entre o peso dos intens esperados e os itens cumpridos na lista de qualidade.
+
+FCR (First Call Resolution), quantas chamadas são resolvidas em necessidade do cliente ligar novamente.
+
+NPS (Net Promoter Score), nivel de probabilidade de recomendação.
+
+CSAT (Customer Satisfaction), nível de satisfação com produto, serviço, atendimento ou geral.
+
+TME (Tempo Médio de Espera), relação entre o numero total de atendimentos e a soma de todos os tempos de espera.
+
+Recontato (Repeat Contact Rate), relação número Total de Atendimentos e
+número de clientes que ligaram novamente sobre o mesmo problema.
+​
+Tempo de Silêncio Inicial (Initial Silence Time), relação entre a soma do tempo antes da primeira palavra vebalizada pelo agente e a quantidade de atendimentos.
+
+
 [Excel - Fórmulas Avançadas](#excel---f%C3%B3rmulas-avan%C3%A7adas)
 * **PROCV**
 * **SOMASE**
@@ -123,6 +147,7 @@ Tempo Médio de Espera (TME)
 ### IFS
 ### TEXTJOIN
 ### LET
+
 ## PROCV (VLOOKUP)
 
 Procura um valor na primeira coluna e retorna um valor de outra coluna na mesma linha.
@@ -374,32 +399,57 @@ Define variáveis nomeadas para uso em uma fórmula.
 ---
 
 ## SQL
-### SELECT
-### FROM
-### WHERE
-### GROUP BY
-### HAVING
-### ORDER BY
-### JOIN e seus tipos:
-#### INNER JOIN
-#### LEFT JOIN
-#### RIGHT JOIN
-#### FULL OUTER JOIN
-### AS (para apelidos de colunas e tabelas)
-### UNION e UNION ALL
-### INSERT INTO
-### UPDATE
-### DELETE FROM
-### COUNT
-### SUM
-### AVG
-### MIN
-### MAX
-### DISTINCT
-### LIKE
-### IN
-### BETWEEN
-### CASE
+### SELECT = campos  
+### FROM = tabela  
+### WHERE = condição  
+### GROUP BY = agrupar  
+### HAVING = condição após agrupamento  
+### ORDER BY = ordenar  
+### JOIN = junção de tabelas  
+### INNER JOIN = apenas correspondentes  
+### LEFT JOIN = todos da esquerda  
+### RIGHT JOIN = todos da direita  
+### FULL OUTER JOIN = todos os registros de ambas  
+### AS = apelido  
+### UNION = unir (sem duplicados)  
+### UNION ALL = unir (com duplicados)  
+### INSERT INTO = inserir dados  
+### UPDATE = atualizar dados  
+### DELETE FROM = deletar dados  
+### COUNT = contar registros  
+### SUM = somar valores  
+### AVG = média  
+### MIN = mínimo  
+### MAX = máximo  
+### DISTINCT = remover duplicados  
+### LIKE = correspondência parcial  
+### IN = pertence a lista  
+### BETWEEN = intervalo  
+### CASE = condicional  
+### EXISTS = existência  
+### NOT = negação  
+### IS NULL / IS NOT NULL = nulo  
+### LIMIT = limite de resultados (MySQL, PostgreSQL)  
+### OFFSET = ignorar linhas (MySQL, PostgreSQL)  
+### TOP = topo de resultados (SQL Server)  
+### ALIAS = apelido  
+### CREATE TABLE = criar tabela  
+### DROP TABLE = excluir tabela  
+### ALTER TABLE = alterar estrutura  
+### ADD COLUMN = adicionar coluna  
+### DROP COLUMN = remover coluna  
+### PRIMARY KEY = chave primária  
+### FOREIGN KEY = chave estrangeira  
+### UNIQUE = valor único  
+### CHECK = restrição  
+### DEFAULT = valor padrão  
+### INDEX = índice  
+### VIEW = visão virtual  
+### STORED PROCEDURE = procedimento armazenado  
+### TRIGGER = gatilho  
+### TRANSACTION = transação  
+### COMMIT = confirmar  
+### ROLLBACK = desfazer  
 
 ---
 
