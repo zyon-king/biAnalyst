@@ -16,7 +16,9 @@
 * **IFS**
 * **TEXTJOIN**
 * **LET**
-  
+
+---
+
 [SQL](#SQL)
 * `SELECT`  
 * `FROM`  
@@ -44,28 +46,33 @@
 * `IN`  
 * `BETWEEN`  
 * `CASE`  
-  
+
+---
+
 [Ferramentas de BI (Power BI/Tableau)](#ferramentas-de-bi-power-bitableau)
 * **DAX (Data Analysis Expressions)***
 * **Conectar Excel, CSV, SQL Server, etc.***
 * **Import***
 * **DirectQuery***
 
-* **Conceitos de ETL**
-    * **Remover colunas***
-    * **Alterar tipos de dados***
-    * **Merge Queries***
-    * **Append Queries***
-    * **Tabelas de fatos**
-    * **Tabelas de dimensão***
-    * **Relacionamentos entre as tabelas**
-    * **Filtro de mão única e de mão dupla**
-    * **Tipos de gráficos (barras, linhas, pizza, etc.)**
-    * **Slicers**
-    * **Gateways e agendamento de atualização de dados**
-    * **Power BI Service: Desktop e Service**
+---
 
-  
+[Conceitos de ETL](#Conceitos-de-ETL)
+* **Remover colunas***
+* **Alterar tipos de dados***
+* **Merge Queries***
+* **Append Queries***
+* **Tabelas de fatos**
+* **Tabelas de dimensão***
+* **Relacionamentos entre as tabelas**
+* **Filtro de mão única e de mão dupla**
+* **Tipos de gráficos (barras, linhas, pizza, etc.)**
+* **Slicers**
+* **Gateways e agendamento de atualização de dados**
+* **Power BI Service: Desktop e Service**
+
+---
+
 * **KPIs de Call Center**
     * **ABS (Absenteeism)**
     * **HT (Handle Time) ou TMA (Tempo Médio de Atendimento)**
@@ -77,6 +84,8 @@
     * **Satisfação do Cliente (CSAT - Customer Satisfaction)**
     * **Turnover**
  
+---
+
 ## Excel - Fórmulas Avançadas
 * **SOMASE**
 * **ÍNDICE**
@@ -90,6 +99,8 @@
 * **IFS**
 * **TEXTJOIN**
 * **LET**
+
+---
 
 ## SQL
 * `SELECT`  
@@ -119,16 +130,33 @@
 * `BETWEEN`  
 * `CASE`  
 
+---
+
 ## Ferramentas de BI (Power BI/Tableau))
 * **DAX (Data Analysis Expressions)***
 * **Conectar Excel, CSV, SQL Server, etc.***
 * **Import***
 * **DirectQuery***
 
+---
+
+### Conceitos de ETL
+* **Remover colunas***
+* **Alterar tipos de dados***
+* **Merge Queries***
+* **Append Queries***
+* **Tabelas de fatos**
+* **Tabelas de dimensão***
+* **Relacionamentos entre as tabelas**
+* **Filtro de mão única e de mão dupla**
+* **Tipos de gráficos (barras, linhas, pizza, etc.)**
+* **Slicers**
+* **Gateways e agendamento de atualização de dados**
+* **Power BI Service: Desktop e Service**
 
 * **asd**
-    * **asd*** 
+    * **asd**
 
 
 * **asd**
-    * **asd***
+    * **asd**
