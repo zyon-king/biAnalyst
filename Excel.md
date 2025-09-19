@@ -1,6 +1,6 @@
 
 ## Excel - Fórmulas Avançadas
-[🔗 PROCV (VLOOKUP)](#procv-vlookup)
+[🔗 PROCV (VLOOKUP)](#procv-vlookup)  
 [🔗 SOMASE](#somase)  
 [🔗 ÍNDICE](#index)  
 [🔗 CORRESP](#corresp)  
@@ -14,6 +14,7 @@
 [🔗 TEXTJOIN](#textjoin)  
 [🔗 LET](#let)
 
+---
 
 ## PROCV (VLOOKUP)
 
@@ -261,6 +262,9 @@ Define variáveis nomeadas para uso em uma fórmula.
 ```excel
 =LET(x; 5; y; 10; x+y)
 ```
+
+[Excel - Fórmulas Avançadas](#excel---fórmulas-avançadas)
+
 
 **Retorna:** 15
 ---
