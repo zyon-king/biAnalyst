@@ -1,30 +1,19 @@
 
 ## Excel - Fórmulas Avançadas
-[PROCV (VLOOKUP)](#procv-vlookup)
-### SOMASE
-### ÍNDICE
-### CORRESP
-### XLOOKUP
-### FILTER
-### SORT
-### UNIQUE
-### SUMIFS
-### COUNTIFS
-### IFS
-### TEXTJOIN
-### LET)
-### SOMASE
-### ÍNDICE
-### CORRESP
-### XLOOKUP
-### FILTER
-### SORT
-### UNIQUE
-### SUMIFS
-### COUNTIFS
-### IFS
-### TEXTJOIN
-### LET
+[🔗 PROCV (VLOOKUP)](#procv-vlookup)
+[🔗 SOMASE](#somase)  
+[🔗 ÍNDICE](#índice)  
+[🔗 CORRESP](#corresp)  
+[🔗 XLOOKUP](#xlookup)  
+[🔗 FILTER](#filter)  
+[🔗 SORT](#sort)  
+[🔗 UNIQUE](#unique)  
+[🔗 SUMIFS](#sumifs)  
+[🔗 COUNTIFS](#countifs)  
+[🔗 IFS](#ifs)  
+[🔗 TEXTJOIN](#textjoin)  
+[🔗 LET](#let)
+
 
 ## PROCV (VLOOKUP)
 
