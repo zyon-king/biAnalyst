@@ -2,7 +2,7 @@
 
 ---
 
-[Excel](###excel)
+[Excel](#excel)
 
 * **Fórmulas Avançadas:**
     * **PROCV**
@@ -75,7 +75,7 @@
     * **Satisfação do Cliente (CSAT - Customer Satisfaction)**
     * **Turnover**
  
-### Excel
+# Excel
 
 ### SQL
 
