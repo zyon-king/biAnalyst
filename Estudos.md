@@ -2,46 +2,48 @@
 
 ---
 
-[Excel](#excel)
-
-* **Fórmulas Avançadas:**
-    * **PROCV**
-    * **SOMASE**
-    * **ÍNDICE**
-    * **CORRESP**
-    * **XLOOKUP**
-    * **FILTER**
-    * **SORT**
-    * **UNIQUE**
-    * **SUMIFS**
-    * **COUNTIFS**
-    * **IFS**
-    * **TEXTJOIN**
-    * **LET**
+[Excel - Fórmulas Avançadas](#excel)
+* **PROCV**
+* **SOMASE**
+* **ÍNDICE**
+* **CORRESP**
+* **XLOOKUP**
+* **FILTER**
+* **SORT**
+* **UNIQUE**
+* **SUMIFS**
+* **COUNTIFS**
+* **IFS**
+* **TEXTJOIN**
+* **LET**
   
 [SQL](###SQL)
-    * `SELECT`  
-    * `FROM`  
-    * `WHERE`  
-    * `GROUP BY`  
-    * `HAVING`
-    * `ORDER BY`  
-    * `JOIN` (e seus tipos: `INNER JOIN`, `LEFT JOIN`, `RIGHT JOIN`, `FULL OUTER JOIN`)  
-    * `AS` (para apelidos de colunas e tabelas)  
-    * `UNION` e `UNION ALL`  
-    * `INSERT INTO`  
-    * `UPDATE`  
-    * `DELETE FROM`  
-    * `COUNT`  
-    * `SUM`  
-    * `AVG`  
-    * `MIN`  
-    * `MAX`  
-    * `DISTINCT`  
-    * `LIKE`  
-    * `IN`  
-    * `BETWEEN`  
-    * `CASE`  
+* `SELECT`  
+* `FROM`  
+* `WHERE`  
+* `GROUP BY`  
+* `HAVING`
+* `ORDER BY`  
+* `JOIN` e seus tipos: 
+   * `INNER JOIN`, 
+   * `LEFT JOIN`, 
+   * `RIGHT JOIN`, 
+   * `FULL OUTER JOIN`  
+* `AS` (para apelidos de colunas e tabelas)  
+* `UNION` e `UNION ALL`  
+* `INSERT INTO`  
+* `UPDATE`  
+* `DELETE FROM`  
+* `COUNT`  
+* `SUM`  
+* `AVG`  
+* `MIN`  
+* `MAX`  
+* `DISTINCT`  
+* `LIKE`  
+* `IN`  
+* `BETWEEN`  
+* `CASE`  
   
 * **Ferramentas de BI (Power BI/Tableau)**
     * **DAX (Data Analysis Expressions)***
@@ -75,7 +77,19 @@
     * **Satisfação do Cliente (CSAT - Customer Satisfaction)**
     * **Turnover**
  
-## Excel
+## Excel - Fórmulas Avançadas
+* **SOMASE**
+* **ÍNDICE**
+* **CORRESP**
+* **XLOOKUP**
+* **FILTER**
+* **SORT**
+* **UNIQUE**
+* **SUMIFS**
+* **COUNTIFS**
+* **IFS**
+* **TEXTJOIN**
+* **LET**
 
 ### SQL
 
