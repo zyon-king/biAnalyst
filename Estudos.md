@@ -2,7 +2,7 @@
 
 ---
 
-[Excel - Fórmulas Avançadas](#excel)
+[Excel - Fórmulas Avançadas](#excel-Fórmulas-Avançadas)
 * **PROCV**
 * **SOMASE**
 * **ÍNDICE**
