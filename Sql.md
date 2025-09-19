@@ -1,5 +1,5 @@
 # SQL
-* DELETE FROM = deletar dados
+[ DELETE FROM = deletar dados](#delete-from)
 * UPDATE = atualizar dados
 * INSERT INTO = inserir dados
 * DROP TABLE = excluir tabela
