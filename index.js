@@ -96,39 +96,60 @@ module.exports = async ({ req, res, log, error }) => {
 const { Client, Databases, Query } = require('node-appwrite');
 
 module.exports = async ({ req, res, log }) => {
-    // Configuração do ambiente Appwrite
-    const client = new Client()
-        .setEndpoint(process.env.APPWRITE_ENDPOINT)
-        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
-        .setKey(process.env.APPWRITE_API_KEY);
-    
-    const databases = new Databases(client);
-    const DATABASE_ID = process.env.DATABASE_ID;
-    const COLLECTION_ID = process.env.COLLECTION_ID;
-    
     try {
-        log('Buscando linha aleatória...');
+        log('=== INÍCIO DA FUNÇÃO ===');
         
-        // Busca todos os documentos primeiro para saber quantos existem
+        // Configuração do ambiente Appwrite
+        const client = new Client()
+            .setEndpoint(process.env.APPWRITE_ENDPOINT)
+            .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+            .setKey(process.env.APPWRITE_API_KEY);
+        
+        const databases = new Databases(client);
+        const DATABASE_ID = process.env.DATABASE_ID;
+        const COLLECTION_ID = process.env.COLLECTION_ID;
+        
+        log('Variáveis de ambiente:');
+        log('DATABASE_ID:', DATABASE_ID);
+        log('COLLECTION_ID:', COLLECTION_ID);
+        log('ENDPOINT:', process.env.APPWRITE_ENDPOINT);
+        
+        if (!DATABASE_ID || !COLLECTION_ID) {
+            throw new Error('DATABASE_ID ou COLLECTION_ID não configurados');
+        }
+        
+        log('Buscando documentos da coleção...');
+        
+        // Busca todos os documentos
         const { documents: allDocs } = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
             Query.limit(100) // Ajuste conforme necessário
         ]);
         
+        log('Documentos encontrados:', allDocs.length);
+        
         if (allDocs.length === 0) {
-            throw new Error('Nenhum documento encontrado no banco de dados');
+            return res.json({ 
+                success: false, 
+                message: 'Nenhum documento encontrado na coleção' 
+            });
         }
         
         // Seleciona um documento aleatório
         const randomIndex = Math.floor(Math.random() * allDocs.length);
         const randomDoc = allDocs[randomIndex];
         
-        log('Documento selecionado:', randomDoc.$id);
+        log('Documento selecionado:');
+        log('ID:', randomDoc.$id);
+        log('Campos disponíveis:', Object.keys(randomDoc));
         
         const responseData = {
             id: randomDoc.$id,
-            exemplo: randomDoc.exemplo,
-            codigo: randomDoc.codigo
+            exemplo: randomDoc.exemplo || 'Exemplo não disponível',
+            codigo: randomDoc.codigo || 'Código não disponível'
         };
+        
+        log('Dados de resposta:', responseData);
+        log('=== FIM DA FUNÇÃO ===');
         
         return res.json({ 
             success: true, 
@@ -136,10 +157,15 @@ module.exports = async ({ req, res, log }) => {
         });
         
     } catch (error) {
-        log('Erro na função:', error);
+        log('=== ERRO NA FUNÇÃO ===');
+        log('Tipo do erro:', error.constructor.name);
+        log('Mensagem do erro:', error.message);
+        log('Stack trace:', error.stack);
+        
         return res.json({ 
             success: false, 
-            message: `Erro ao buscar dados: ${error.message}` 
-        }, 500);
+            message: `Erro: ${error.message}`,
+            error_type: error.constructor.name
+        });
     }
 };
