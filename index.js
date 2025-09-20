@@ -12,7 +12,7 @@
 // index.js (Appwrite Function - CommonJS)
 // ===================================
 
-// Importa a biblioteca do Supabase
+/* Importa a biblioteca do Supabase
 const { createClient } = require('@supabase/supabase-js');
 
 // Conecta ao Supabase usando variáveis de ambiente seguras
@@ -91,3 +91,77 @@ module.exports = async ({ req, res, log, error }) => {
         return res.json({ success: false, message: e.message }, 500);
     }
 };
+*/
+
+const { Client, Databases, Query } = require('node-appwrite');
+
+module.exports = async ({ req, res, log }) => {
+    const client = new Client();
+    client
+        .setEndpoint(process.env.APPWRITE_ENDPOINT)
+        .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
+        .setKey(process.env.APPWRITE_API_KEY);
+
+    const databases = new Databases(client);
+
+    const DATABASE_ID = process.env.DATABASE_ID;
+    const COLLECTION_ID = process.env.COLLECTION_ID;
+
+    // Tenta analisar o corpo da requisição para encontrar a 'acao'
+    let requestBody;
+    try {
+        requestBody = JSON.parse(req.body);
+    } catch (e) {
+        return res.json({ success: false, message: 'Corpo da requisição inválido.' }, 400);
+    }
+    
+    const { acao, parametros } = requestBody;
+
+    // Verifica a ação solicitada
+    if (acao === 'getQuestion') {
+        try {
+            // Lógica para obter a pergunta do quiz
+            const { documents: [questionDoc] } = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
+                Query.limit(1),
+                Query.offset(Math.floor(Math.random() * 5))
+            ]);
+            
+            const { documents: alternativesDocs } = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
+                Query.limit(4),
+                Query.notEqual('$id', questionDoc.$id)
+            ]);
+
+            const alternatives = alternativesDocs.map(doc => doc.codigo);
+            const allOptions = shuffleArray([questionDoc.codigo, ...alternatives]);
+
+            const responseData = {
+                exemplo: questionDoc.exemplo,
+                codigo: questionDoc.codigo,
+                alternativas: allOptions
+            };
+
+            return res.json({ success: true, data: responseData });
+
+        } catch (error) {
+            log('Erro na função (getQuestion):', error);
+            return res.json({ success: false, message: 'Falha ao buscar a pergunta do quiz.' }, 500);
+        }
+
+    } else if (acao === 'outraAcao') {
+        // Lógica para outras ações (ex: consultar um comando específico)
+        // ...
+        return res.json({ success: true, message: `Ação '${acao}' executada.` });
+
+    } else {
+        // Ação desconhecida
+        return res.json({ success: false, message: 'Ação desconhecida.' }, 400);
+    }
+};
+
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
