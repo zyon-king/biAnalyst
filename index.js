@@ -101,59 +101,74 @@ module.exports = async ({ req, res, log }) => {
         .setEndpoint(process.env.APPWRITE_ENDPOINT)
         .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
         .setKey(process.env.APPWRITE_API_KEY);
-
+    
     const databases = new Databases(client);
-
     const DATABASE_ID = process.env.DATABASE_ID;
     const COLLECTION_ID = process.env.COLLECTION_ID;
-
-    // Tenta analisar o corpo da requisição
+    
+    // Parsing mais flexível do corpo da requisição
     let requestBody;
     try {
-        // A Appwrite Function parseia automaticamente o corpo JSON para você
-        requestBody = req.body;
-        // Ou, se o corpo não for JSON, pode ser necessário parsear manualmente:
-        // requestBody = JSON.parse(req.body);
+        // Se req.body já for um objeto, use diretamente
+        if (typeof req.body === 'object' && req.body !== null) {
+            requestBody = req.body;
+        } else {
+            // Caso contrário, tente parsear como JSON
+            requestBody = JSON.parse(req.body);
+        }
+        
+        log('Request body parseado:', requestBody);
+        
     } catch (e) {
+        log('Erro ao parsear request body:', e);
         return res.json({ success: false, message: 'Corpo da requisição inválido.' }, 400);
     }
     
-    // Agora a 'acao' e os 'parametros' são acessados diretamente
-    const { acao, parametros } = requestBody;
-
+    // Extrai acao e parametros (com fallbacks)
+    const acao = requestBody.acao || requestBody.action;
+    const parametros = requestBody.parametros || requestBody.params || {};
+    
+    log('Ação recebida:', acao);
+    
     // Verifica a ação solicitada
     if (acao === 'getQuestion') {
         try {
+            log('Processando getQuestion...');
+            
             // Lógica para obter a pergunta do quiz
             const { documents: [questionDoc] } = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
                 Query.limit(1),
                 Query.offset(Math.floor(Math.random() * 5))
             ]);
             
+            if (!questionDoc) {
+                throw new Error('Nenhuma pergunta encontrada no banco de dados');
+            }
+            
             const { documents: alternativesDocs } = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
                 Query.limit(4),
                 Query.notEqual('$id', questionDoc.$id)
             ]);
-
+            
             const alternatives = alternativesDocs.map(doc => doc.codigo);
             const allOptions = shuffleArray([questionDoc.codigo, ...alternatives]);
-
+            
             const responseData = {
                 exemplo: questionDoc.exemplo,
                 codigo: questionDoc.codigo,
                 alternativas: allOptions
             };
-
+            
+            log('Resposta preparada:', responseData);
             return res.json({ success: true, data: responseData });
-
+            
         } catch (error) {
             log('Erro na função (getQuestion):', error);
-            return res.json({ success: false, message: 'Falha ao buscar a pergunta do quiz.' }, 500);
+            return res.json({ success: false, message: `Falha ao buscar a pergunta do quiz: ${error.message}` }, 500);
         }
-
     } else {
-        // Ação desconhecida
-        return res.json({ success: false, message: 'Ação não reconhecida.' }, 400);
+        log('Ação não reconhecida:', acao);
+        return res.json({ success: false, message: `Ação não reconhecida: ${acao}` }, 400);
     }
 };
 
