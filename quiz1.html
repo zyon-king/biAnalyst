@@ -16,85 +16,96 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
+            padding: 10px;
             background: var(--dark-blue);
             color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            line-height: 1.6;
+            line-height: 1.4;
+            /* Altura mínima reduzida */
+            min-height: auto;
+            overflow-x: hidden;
         }
 
         .container {
             width: 100%;
-            max-width: 900px;
-            padding: 30px;
+            max-width: 100%;
+            min-height: 100vh;
+            padding: 15px;
             background: var(--wine);
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
             text-align: center;
+            box-sizing: border-box;
+            /* Permite scroll interno se necessário */
+            overflow-y: auto;
+            /* Altura máxima para Google Sites */
+            max-height: 80vh;
         }
-
+        
         h1 {
             color: var(--text-color);
-            margin-bottom: 30px;
-            font-size: 28px;
+            margin: 0 0 20px 0;
+            font-size: 22px;
+            padding: 0;
         }
 
         .content-section {
-            margin: 30px 0;
+            margin: 15px 0;
             background: rgba(0, 0, 0, 0.2);
-            padding: 25px;
-            border-radius: 10px;
+            padding: 15px;
+            border-radius: 6px;
             text-align: left;
+            
         }
 
         .content-section h3 {
             color: #e0e0e0;
-            margin-top: 0;
-            border-bottom: 2px solid var(--border-color);
-            padding-bottom: 10px;
+            margin: 0 0 10px 0;
+            font-size: 16px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
         }
 
-        .example-content {
+        .example-content, .codigo-content {
             background: rgba(0, 0, 0, 0.3);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 10px 0;
             font-family: 'Courier New', monospace;
+            font-size: 16px;
+            line-height: 1.3;
+            /* Permite quebra de linha */
             white-space: pre-wrap;
             word-wrap: break-word;
+            /* Scroll horizontal se necessário */
+            overflow-x: auto;
         }
 
         .codigo-content {
             background: rgba(74, 20, 140, 0.3);
-            padding: 15px;
-            border-radius: 8px;
-            margin: 15px 0;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
             border: 1px solid var(--border-color);
+            
         }
 
         .load-btn {
             background-color: #4a148c;
             color: var(--text-color);
             border: none;
-            padding: 15px 30px;
-            border-radius: 10px;
+            padding: 10px 20px;
+            border-radius: 6px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 14px;
             font-weight: bold;
-            margin: 20px 10px;
+            margin: 8px 5px;
             transition: all 0.3s;
+            /* Botões menores */
+            min-width: 120px;
         }
 
         .load-btn:hover:not(:disabled) {
             background-color: #5c18b7;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transform: translateY(-1px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
         }
 
         .load-btn:disabled {
@@ -106,28 +117,103 @@
         .loading {
             color: #ccc;
             font-style: italic;
+            font-size: 12px;
         }
 
         .error {
             color: #ff6b6b;
             background: rgba(255, 107, 107, 0.1);
-            padding: 15px;
-            border-radius: 8px;
+            padding: 10px;
+            border-radius: 6px;
             border: 1px solid #ff6b6b;
+            font-size: 12px;
         }
 
         .success-indicator {
             color: #4caf50;
             font-weight: bold;
+            font-size: 11px;
+            padding: 5px;
+            background: rgba(76, 175, 80, 0.1);
+            border-radius: 4px;
+            margin: 5px 0;
+        }
+
+        /* Otimizações específicas para Google Sites */
+        .comando-item {
+            margin-bottom: 12px;
+            padding: 8px;
+            background: rgba(74, 20, 140, 0.2);
+            border-radius: 4px;
+            border: 1px solid #4a148c;
+            font-size: 14px;
+        }
+
+        .comando-titulo {
+            color: #ccc;
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .comando-codigo {
+            color: #e0e0e0;
+            font-weight: bold;
+            white-space: pre-wrap;
+            font-family: 'Courier New', monospace;
+        }
+
+        /* Scroll customizado */
+        .content-section::-webkit-scrollbar,
+        .codigo-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .content-section::-webkit-scrollbar-track,
+        .codigo-content::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.2);
+            border-radius: 3px;
+        }
+
+        .content-section::-webkit-scrollbar-thumb,
+        .codigo-content::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
+        }
+
+        /* Responsividade para telas pequenas */
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+                margin: 5px;
+            }
+            
+            h1 {
+                font-size: 18px;
+            }
+            
+            .load-btn {
+                font-size: 12px;
+                padding: 8px 15px;
+                margin: 5px 3px;
+            }
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .fade-in {
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        /* Compacta ainda mais o layout */
+        .buttons-container {
+            margin: 15px 0 10px 0;
+        }
+
+        .compact-section {
+            margin: 10px 0;
         }
     </style>
 </head>
@@ -136,30 +222,32 @@
 <div class="container">
     <h1>📚 Quiz de Comandos SQL</h1>
     
-    <div class="content-section">
-        <h3>💡 Exemplo:</h3>
-        <div class="example-content" id="exemplo-content">
-            <span class="loading">Clique em "Carregar Exemplo" para ver um comando SQL...</span>
+    <div class="compact-section">
+        <div class="content-section">
+            <h3>💡 Exemplo:</h3>
+            <div class="example-content" id="exemplo-content">
+                <span class="loading">Clique em "Carregar Exemplo" para ver um comando SQL...</span>
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h3>⚡ Código SQL:</h3>
+            <div class="codigo-content" id="codigo-content">
+                <span class="loading">O código aparecerá aqui...</span>
+            </div>
         </div>
     </div>
 
-    <div class="content-section">
-        <h3>⚡ Código SQL:</h3>
-        <div class="codigo-content" id="codigo-content">
-            <span class="loading">O código aparecerá aqui...</span>
-        </div>
-    </div>
-
-    <div>
-        <button class="load-btn" id="load-btn">🔄 Carregar Exemplo</button>
-        <button class="load-btn" id="reload-btn">🎲 Outro Exemplo</button>
+    <div class="buttons-container">
+        <button class="load-btn" id="load-btn">🔄 Carregar</button>
+        <button class="load-btn" id="reload-btn">🎲 Outro</button>
     </div>
 </div>
 
 <script type="module">
 import { Client, Functions } from 'https://cdn.jsdelivr.net/npm/appwrite@20.0.0/dist/esm/sdk.js';
 
-// 1. Configuração do cliente Appwrite
+// Configuração do cliente Appwrite
 const client = new Client()
     .setEndpoint('https://nyc.cloud.appwrite.io/v1')
     .setProject('686a67d5003a1b4b1bf9');
@@ -173,20 +261,14 @@ const codigoContent = document.getElementById('codigo-content');
 const loadBtn = document.getElementById('load-btn');
 const reloadBtn = document.getElementById('reload-btn');
 
-/**
- * Executa uma ação na Appwrite Function para buscar 5 comandos aleatórios.
- */
 async function buscarComandosAleatorios() {
     try {
-        // Desabilita os botões durante o carregamento
         loadBtn.disabled = true;
         reloadBtn.disabled = true;
         
-        // Mostra indicadores de carregamento
-        exemploContent.innerHTML = '<span class="loading">🔄 Carregando exemplos...</span>';
-        codigoContent.innerHTML = '<span class="loading">🔄 Carregando códigos...</span>';
+        exemploContent.innerHTML = '<span class="loading">🔄 Carregando...</span>';
+        codigoContent.innerHTML = '<span class="loading">🔄 Carregando...</span>';
 
-        // Chama a função para buscar todos os comandos
         const execution = await functions.createExecution(
             functionId,
             JSON.stringify({ acao: 'buscar-tudo', parametros: { tabela: 'comandos' } }),
@@ -197,165 +279,112 @@ async function buscarComandosAleatorios() {
         const data = JSON.parse(execution.responseBody);
 
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {
-            // Seleciona 5 comandos aleatórios (ou todos se houver menos de 5)
             const comandosAleatorios = selecionarComandosAleatorios(data.data, 5);
-            
-            // Exibe os comandos selecionados
             exibirMultiplosComandos(comandosAleatorios);
         } else {
-            exemploContent.innerHTML = '<div class="error">❌ Nenhum comando encontrado na base de dados.</div>';
+            exemploContent.innerHTML = '<div class="error">❌ Nenhum comando encontrado.</div>';
             codigoContent.innerHTML = '<div class="error">❌ Erro ao carregar dados.</div>';
         }
     } catch (error) {
-        exemploContent.innerHTML = `<div class="error">❌ Erro de comunicação: ${error.message}</div>`;
-        codigoContent.innerHTML = `<div class="error">❌ Falha na conexão com o servidor.</div>`;
+        // Fallback para exemplos estáticos em caso de erro
+        exibirExemplosEstaticos();
     } finally {
-        // Reabilita os botões
         loadBtn.disabled = false;
         reloadBtn.disabled = false;
     }
 }
 
-/**
- * Seleciona uma quantidade específica de comandos aleatórios sem repetição
- */
 function selecionarComandosAleatorios(comandos, quantidade) {
     const comandosEmbaralhados = [...comandos].sort(() => Math.random() - 0.5);
     return comandosEmbaralhados.slice(0, Math.min(quantidade, comandos.length));
 }
 
-/**
- * Exibe múltiplos comandos nas seções apropriadas
- */
 function exibirMultiplosComandos(comandos) {
-    let exemploHtml = '<div class="fade-in">';
-    let codigoHtml = '<div class="fade-in">';
-
-    // Seleciona um comando ALEATÓRIO dos 5 para mostrar o exemplo
+    // Seleciona um comando aleatório para exemplo
     const indiceAleatorio = Math.floor(Math.random() * comandos.length);
     const comandoExemplo = comandos[indiceAleatorio];
     
-    // Monta o HTML para exemplo - APENAS UM ALEATÓRIO
-    exemploHtml += `
-        <div style="padding: 20px; border-left: 4px solid #4a148c; background: rgba(0,0,0,0.2); border-radius: 8px;">
-            <strong>📋 ${comandoExemplo.nome_comando || 'Comando Exemplo'}:</strong><br>
-            ${comandoExemplo.exemplo_comando || 'Nenhum exemplo disponível'}
-            ${comandoExemplo.id ? `<br><small style="color: #666;">🔢 ID: ${comandoExemplo.id}</small>` : ''}
-            <br><small style="color: #98c379;">🎲 Exemplo selecionado aleatoriamente dos ${comandos.length} comandos</small>
+    // HTML compacto para exemplo
+    let exemploHtml = `
+        <div class="fade-in">
+            <div style="padding: 12px; border-left: 3px solid #4a148c; background: rgba(0,0,0,0.2); border-radius: 4px;">
+                <strong style="font-size: 15px;">${comandoExemplo.nome_comando || 'Exemplo SQL'}:</strong><br>
+                <span style="font-size: 14px;">${comandoExemplo.exemplo_comando || 'Nenhum exemplo disponível'}</span>
+            </div>
         </div>
     `;
 
-    // Monta o HTML para códigos - TODOS OS 5
+    // HTML compacto para códigos
+    let codigoHtml = '<div class="fade-in">';
     comandos.forEach((comando, index) => {
         codigoHtml += `
-            <div style="margin-bottom: 20px; padding: 12px; background: rgba(74, 20, 140, 0.2); border-radius: 6px; border: 1px solid #4a148c;">
-                <small style="color: #ccc; font-size: 12px;">${comando.nome_comando || `Comando ${index + 1}`}:</small><br>
-                <code style="color: #e0e0e0; font-weight: bold; white-space: pre-wrap;">
-${comando.codigo_comando || 'Código não disponível'}
-                </code>
+            <div class="comando-item">
+                <div class="comando-titulo">${comando.nome_comando || `Comando ${index + 1}`}:</div>
+                <div class="comando-codigo">${comando.codigo_comando || 'Código não disponível'}</div>
             </div>
         `;
     });
-
-    exemploHtml += '</div>';
     codigoHtml += '</div>';
 
-    // Atualiza o conteúdo das seções
     exemploContent.innerHTML = exemploHtml;
     codigoContent.innerHTML = codigoHtml;
 
-    // Adiciona indicador de sucesso
+    // Indicador de sucesso mais discreto
     const successIndicator = document.createElement('div');
     successIndicator.className = 'success-indicator';
-    successIndicator.innerHTML = `✅ 1 exemplo aleatório e ${comandos.length} códigos SQL carregados!`;
-    successIndicator.style.fontSize = '14px';
-    successIndicator.style.textAlign = 'center';
-    successIndicator.style.margin = '10px 0';
-    successIndicator.style.padding = '8px';
-    successIndicator.style.background = 'rgba(76, 175, 80, 0.2)';
-    successIndicator.style.borderRadius = '6px';
-    successIndicator.style.border = '1px solid #4caf50';
-    
+    successIndicator.innerHTML = `✅ ${comandos.length} comandos carregados!`;
     exemploContent.insertBefore(successIndicator, exemploContent.firstChild);
     
     setTimeout(() => {
         if (successIndicator.parentNode) {
             successIndicator.remove();
         }
-    }, 4000);
+    }, 3000);
 }
 
-/**
- * Função alternativa para quando não há dados no banco
- * Exibe 5 comandos SQL de exemplo estáticos
- */
 function exibirExemplosEstaticos() {
     const exemplosEstaticos = [
         {
-            descricao: "Buscar todos os registros de uma tabela",
-            codigo: "SELECT * FROM usuarios;",
-            tipo: "SELECT"
+            nome_comando: "SELECT básico",
+            exemplo_comando: "Buscar todos os registros de uma tabela",
+            codigo_comando: "SELECT * FROM usuarios;"
         },
         {
-            descricao: "Buscar usuários ativos apenas com campos específicos",
-            codigo: "SELECT nome, email FROM usuarios WHERE ativo = true;",
-            tipo: "SELECT"
+            nome_comando: "SELECT com WHERE",
+            exemplo_comando: "Buscar usuários ativos apenas",
+            codigo_comando: "SELECT nome, email FROM usuarios WHERE ativo = true;"
         },
         {
-            descricao: "Inserir um novo usuário na tabela",
-            codigo: "INSERT INTO usuarios (nome, email, ativo) VALUES ('João Silva', 'joao@email.com', true);",
-            tipo: "INSERT"
+            nome_comando: "INSERT",
+            exemplo_comando: "Inserir um novo usuário",
+            codigo_comando: "INSERT INTO usuarios (nome, email, ativo) VALUES ('João', 'joao@email.com', true);"
         },
         {
-            descricao: "Atualizar dados de um usuário existente",
-            codigo: "UPDATE usuarios SET email = 'novo@email.com' WHERE id = 1;",
-            tipo: "UPDATE"
+            nome_comando: "UPDATE",
+            exemplo_comando: "Atualizar dados de um usuário",
+            codigo_comando: "UPDATE usuarios SET email = 'novo@email.com' WHERE id = 1;"
         },
         {
-            descricao: "Deletar usuários inativos da base",
-            codigo: "DELETE FROM usuarios WHERE ativo = false;",
-            tipo: "DELETE"
-        },
-        {
-            descricao: "Contar total de usuários cadastrados",
-            codigo: "SELECT COUNT(*) as total_usuarios FROM usuarios;",
-            tipo: "COUNT"
-        },
-        {
-            descricao: "Buscar usuários ordenados por nome",
-            codigo: "SELECT * FROM usuarios ORDER BY nome ASC;",
-            tipo: "SELECT"
-        },
-        {
-            descricao: "Buscar usuários com email específico",
-            codigo: "SELECT * FROM usuarios WHERE email LIKE '%@gmail.com';",
-            tipo: "SELECT"
-        },
-        {
-            descricao: "Criar uma nova tabela de produtos",
-            codigo: "CREATE TABLE produtos (id INT PRIMARY KEY, nome VARCHAR(100), preco DECIMAL(10,2));",
-            tipo: "CREATE"
-        },
-        {
-            descricao: "Fazer join entre tabelas de usuários e pedidos",
-            codigo: "SELECT u.nome, p.data_pedido FROM usuarios u INNER JOIN pedidos p ON u.id = p.usuario_id;",
-            tipo: "JOIN"
+            nome_comando: "DELETE",
+            exemplo_comando: "Deletar usuários inativos",
+            codigo_comando: "DELETE FROM usuarios WHERE ativo = false;"
         }
     ];
 
-    // Seleciona 5 exemplos aleatórios
-    const exemplosAleatorios = selecionarComandosAleatorios(exemplosEstaticos, 5);
-    exibirMultiplosComandos(exemplosAleatorios);
+    const comandosAleatorios = selecionarComandosAleatorios(exemplosEstaticos, 3);
+    exibirMultiplosComandos(comandosAleatorios);
 }
 
 // Event Listeners
 loadBtn.addEventListener('click', buscarComandosAleatorios);
 reloadBtn.addEventListener('click', buscarComandosAleatorios);
 
-// Carrega exemplos automaticamente quando a página é carregada
+// Auto-carregamento
 document.addEventListener('DOMContentLoaded', () => {
-    // Delay pequeno para melhor UX
-    setTimeout(buscarComandosAleatorios, 500);
+    setTimeout(() => {
+        // Tenta carregar dados do Appwrite, se falhar usa exemplos estáticos
+        buscarComandosAleatorios().catch(() => exibirExemplosEstaticos());
+    }, 300);
 });
 </script>
 
