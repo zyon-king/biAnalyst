@@ -231,17 +231,22 @@ function exibirMultiplosComandos(comandos) {
     let exemploHtml = '<div class="fade-in">';
     let codigoHtml = '<div class="fade-in">';
 
-    comandos.forEach((comando, index) => {
-        // Monta o HTML para exemplos usando os campos corretos
-        exemploHtml += `
-            <div style="margin-bottom: 25px; padding: 15px; border-left: 4px solid #4a148c; background: rgba(0,0,0,0.2);">
-                <strong>📋 ${comando.nome_comando || `Comando ${index + 1}`}:</strong><br>
-                ${comando.exemplo_comando || 'Nenhum exemplo disponível'}
-                ${comando.id ? `<br><small style="color: #666;">🔢 ID: ${comando.id}</small>` : ''}
-            </div>
-        `;
+    // Seleciona um comando ALEATÓRIO dos 5 para mostrar o exemplo
+    const indiceAleatorio = Math.floor(Math.random() * comandos.length);
+    const comandoExemplo = comandos[indiceAleatorio];
+    
+    // Monta o HTML para exemplo - APENAS UM ALEATÓRIO
+    exemploHtml += `
+        <div style="padding: 20px; border-left: 4px solid #4a148c; background: rgba(0,0,0,0.2); border-radius: 8px;">
+            <strong>📋 ${comandoExemplo.nome_comando || 'Comando Exemplo'}:</strong><br>
+            ${comandoExemplo.exemplo_comando || 'Nenhum exemplo disponível'}
+            ${comandoExemplo.id ? `<br><small style="color: #666;">🔢 ID: ${comandoExemplo.id}</small>` : ''}
+            <br><small style="color: #98c379;">🎲 Exemplo selecionado aleatoriamente dos ${comandos.length} comandos</small>
+        </div>
+    `;
 
-        // Monta o HTML para códigos usando o campo correto
+    // Monta o HTML para códigos - TODOS OS 5
+    comandos.forEach((comando, index) => {
         codigoHtml += `
             <div style="margin-bottom: 20px; padding: 12px; background: rgba(74, 20, 140, 0.2); border-radius: 6px; border: 1px solid #4a148c;">
                 <small style="color: #ccc; font-size: 12px;">${comando.nome_comando || `Comando ${index + 1}`}:</small><br>
@@ -262,7 +267,7 @@ ${comando.codigo_comando || 'Código não disponível'}
     // Adiciona indicador de sucesso
     const successIndicator = document.createElement('div');
     successIndicator.className = 'success-indicator';
-    successIndicator.innerHTML = `✅ ${comandos.length} comandos SQL carregados com sucesso!`;
+    successIndicator.innerHTML = `✅ 1 exemplo aleatório e ${comandos.length} códigos SQL carregados!`;
     successIndicator.style.fontSize = '14px';
     successIndicator.style.textAlign = 'center';
     successIndicator.style.margin = '10px 0';
