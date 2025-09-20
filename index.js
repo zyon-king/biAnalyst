@@ -106,76 +106,40 @@ module.exports = async ({ req, res, log }) => {
     const DATABASE_ID = process.env.DATABASE_ID;
     const COLLECTION_ID = process.env.COLLECTION_ID;
     
-    // Parsing mais flexível do corpo da requisição
-    let requestBody;
     try {
-        // Se req.body já for um objeto, use diretamente
-        if (typeof req.body === 'object' && req.body !== null) {
-            requestBody = req.body;
-        } else {
-            // Caso contrário, tente parsear como JSON
-            requestBody = JSON.parse(req.body);
+        log('Buscando linha aleatória...');
+        
+        // Busca todos os documentos primeiro para saber quantos existem
+        const { documents: allDocs } = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
+            Query.limit(100) // Ajuste conforme necessário
+        ]);
+        
+        if (allDocs.length === 0) {
+            throw new Error('Nenhum documento encontrado no banco de dados');
         }
         
-        log('Request body parseado:', requestBody);
+        // Seleciona um documento aleatório
+        const randomIndex = Math.floor(Math.random() * allDocs.length);
+        const randomDoc = allDocs[randomIndex];
         
-    } catch (e) {
-        log('Erro ao parsear request body:', e);
-        return res.json({ success: false, message: 'Corpo da requisição inválido.' }, 400);
-    }
-    
-    // Extrai acao e parametros (com fallbacks)
-    const acao = requestBody.acao || requestBody.action;
-    const parametros = requestBody.parametros || requestBody.params || {};
-    
-    log('Ação recebida:', acao);
-    
-    // Verifica a ação solicitada
-    if (acao === 'getQuestion') {
-        try {
-            log('Processando getQuestion...');
-            
-            // Lógica para obter a pergunta do quiz
-            const { documents: [questionDoc] } = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
-                Query.limit(1),
-                Query.offset(Math.floor(Math.random() * 5))
-            ]);
-            
-            if (!questionDoc) {
-                throw new Error('Nenhuma pergunta encontrada no banco de dados');
-            }
-            
-            const { documents: alternativesDocs } = await databases.listDocuments(DATABASE_ID, COLLECTION_ID, [
-                Query.limit(4),
-                Query.notEqual('$id', questionDoc.$id)
-            ]);
-            
-            const alternatives = alternativesDocs.map(doc => doc.codigo);
-            const allOptions = shuffleArray([questionDoc.codigo, ...alternatives]);
-            
-            const responseData = {
-                exemplo: questionDoc.exemplo,
-                codigo: questionDoc.codigo,
-                alternativas: allOptions
-            };
-            
-            log('Resposta preparada:', responseData);
-            return res.json({ success: true, data: responseData });
-            
-        } catch (error) {
-            log('Erro na função (getQuestion):', error);
-            return res.json({ success: false, message: `Falha ao buscar a pergunta do quiz: ${error.message}` }, 500);
-        }
-    } else {
-        log('Ação não reconhecida:', acao);
-        return res.json({ success: false, message: `Ação não reconhecida: ${acao}` }, 400);
+        log('Documento selecionado:', randomDoc.$id);
+        
+        const responseData = {
+            id: randomDoc.$id,
+            exemplo: randomDoc.exemplo,
+            codigo: randomDoc.codigo
+        };
+        
+        return res.json({ 
+            success: true, 
+            data: responseData 
+        });
+        
+    } catch (error) {
+        log('Erro na função:', error);
+        return res.json({ 
+            success: false, 
+            message: `Erro ao buscar dados: ${error.message}` 
+        }, 500);
     }
 };
-
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-    }
-    return array;
-}
