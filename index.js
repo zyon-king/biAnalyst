@@ -12,7 +12,7 @@
 // index.js (Appwrite Function - CommonJS)
 // ===================================
 
-/* Importa a biblioteca do Supabase
+// Importa a biblioteca do Supabase
 const { createClient } = require('@supabase/supabase-js');
 
 // Conecta ao Supabase usando variáveis de ambiente seguras
@@ -91,9 +91,8 @@ module.exports = async ({ req, res, log, error }) => {
         return res.json({ success: false, message: e.message }, 500);
     }
 };
-*/
 
-const { Client, Databases, Query } = require('node-appwrite');
+/*const { Client, Databases, Query } = require('node-appwrite');
 
 module.exports = async ({ req, res, log }) => {
     try {
@@ -168,4 +167,4 @@ module.exports = async ({ req, res, log }) => {
             error_type: error.constructor.name
         });
     }
-};
+};*/
