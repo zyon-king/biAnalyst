@@ -188,11 +188,82 @@
             // Remove o ponto e vírgula opcional e converte o comando para maiúsculas para a verificação
             const cleanCommand = fullCommand.replace(/;$/, '').toUpperCase();
 
-            // Lógica para analisar o comando digitado
-            if (cleanCommand === 'SELECT * FROM QUANTIDADES') {
-                executarAcao('buscar-tudo', { tabela: 'quantidades' });
-            } else if (cleanCommand === 'SELECT * FROM QUANTIDADES WHERE LOJA = "LOJA B"') {
-                executarAcao('buscar-por-loja', { loja: 'Loja B' });
+            // Lógica para analisar o comando digitado - AJUSTADO PARA TABELA "comandos"
+            if (cleanCommand === 'SELECT * FROM COMANDOS') {
+                executarAcao('buscar-tudo', { tabela: 'comandos' });
+            } else if (cleanCommand.startsWith('SELECT * FROM COMANDOS WHERE')) {
+                // Extrai a condição WHERE para comandos específicos
+                // Exemplo: SELECT * FROM comandos WHERE coluna = "valor"
+                const whereClause = fullCommand.substring(fullCommand.toUpperCase().indexOf('WHERE') + 5).trim();
+
+                // Parse básico para condições simples (você pode expandir conforme necessário)
+                const match = whereClause.match(/(\w+)\s*=\s*["']([^"']+)["']/i);
+                if (match) {
+                    const [, coluna, valor] = match;
+                    executarAcao('buscar-por-condicao', { 
+                        tabela: 'comandos', 
+                        coluna: coluna.toLowerCase(), 
+                        valor: valor 
+                    });
+                } else {
+                    resultadoElement.textContent = 'Sintaxe WHERE inválida. Use: WHERE coluna = "valor"';
+                }
+            } else if (cleanCommand.startsWith('INSERT INTO COMANDOS')) {
+                // Exemplo: INSERT INTO comandos (col1, col2) VALUES ('val1', 'val2')
+                const insertMatch = fullCommand.match(/INSERT INTO comandos\s*\(([^)]+)\)\s*VALUES\s*\(([^)]+)\)/i);
+                if (insertMatch) {
+                    const [, colunas, valores] = insertMatch;
+                    const colunasArray = colunas.split(',').map(col => col.trim());
+                    const valoresArray = valores.split(',').map(val => val.trim().replace(/["']/g, ''));
+
+                    const dados = {};
+                    colunasArray.forEach((col, index) => {
+                        dados[col] = valoresArray[index];
+                    });
+
+                    executarAcao('inserir', { tabela: 'comandos', dados: dados });
+                } else {
+                    resultadoElement.textContent = 'Sintaxe INSERT inválida. Use: INSERT INTO comandos (col1, col2) VALUES ("val1", "val2")';
+                }
+            } else if (cleanCommand.startsWith('UPDATE COMANDOS')) {
+                // Exemplo: UPDATE comandos SET coluna = 'novo_valor' WHERE condição
+                const updateMatch = fullCommand.match(/UPDATE comandos SET\s+(.+?)\s+WHERE\s+(.+)/i);
+                if (updateMatch) {
+                    const [, setClause, whereClause] = updateMatch;
+
+                    // Parse SET clause
+                    const setMatch = setClause.match(/(\w+)\s*=\s*["']([^"']+)["']/);
+                    const whereMatch = whereClause.match(/(\w+)\s*=\s*["']([^"']+)["']/);
+
+                    if (setMatch && whereMatch) {
+                        executarAcao('atualizar', {
+                            tabela: 'comandos',
+                            setColuna: setMatch[1],
+                            setValor: setMatch[2],
+                            whereColuna: whereMatch[1],
+                            whereValor: whereMatch[2]
+                        });
+                    } else {
+                        resultadoElement.textContent = 'Sintaxe UPDATE inválida. Use: UPDATE comandos SET coluna = "valor" WHERE coluna2 = "valor2"';
+                    }
+                }
+            } else if (cleanCommand.startsWith('DELETE FROM COMANDOS')) {
+                // Exemplo: DELETE FROM comandos WHERE condição
+                const deleteMatch = fullCommand.match(/DELETE FROM comandos WHERE\s+(.+)/i);
+                if (deleteMatch) {
+                    const whereClause = deleteMatch[1];
+                    const whereMatch = whereClause.match(/(\w+)\s*=\s*["']([^"']+)["']/);
+
+                    if (whereMatch) {
+                        executarAcao('deletar', {
+                            tabela: 'comandos',
+                            coluna: whereMatch[1],
+                            valor: whereMatch[2]
+                        });
+                    } else {
+                        resultadoElement.textContent = 'Sintaxe DELETE inválida. Use: DELETE FROM comandos WHERE coluna = "valor"';
+                    }
+                }
             } else {
                 // Exibe uma mensagem de erro se o comando não for reconhecido
                 resultadoElement.textContent = 'Comando não reconhecido ou sintaxe inválida.';
