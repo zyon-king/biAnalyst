@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comandos SQL Aleatórios</title>
+    <style>
+        :root {
+            --dark-blue: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            --wine: linear-gradient(135deg, #4b0a0a 0%, #6b0c1e 50%, #3f0b14 100%);
+            --light-wine: linear-gradient(135deg, #3c0a24 0%, #5e0b35 50%, #3c0a24 100%);
+            --text-color: #f0f0f0;
+            --border-color: #4a148c;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: var(--dark-blue);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 30px;
+            background: var(--wine);
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--border-color);
+            text-align: center;
+        }
+
+        h1 {
+            color: var(--text-color);
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+
+        .content-section {
+            margin: 30px 0;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 10px;
+            text-align: left;
+        }
+
+        .content-section h3 {
+            color: #e0e0e0;
+            margin-top: 0;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+        }
+
+        .example-content {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .codigo-content {
+            background: rgba(74, 20, 140, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            border: 1px solid var(--border-color);
+        }
+
+        .load-btn {
+            background-color: #4a148c;
+            color: var(--text-color);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            margin: 20px 10px;
+            transition: all 0.3s;
+        }
+
+        .load-btn:hover:not(:disabled) {
+            background-color: #5c18b7;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .load-btn:disabled {
+            background-color: #666;
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .loading {
+            color: #ccc;
+            font-style: italic;
+        }
+
+        .error {
+            color: #ff6b6b;
+            background: rgba(255, 107, 107, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ff6b6b;
+        }
+
+        .success-indicator {
+            color: #4caf50;
+            font-weight: bold;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>📚 Comandos SQL Aleatórios</h1>
+    
+    <div class="content-section">
+        <h3>💡 Exemplo:</h3>
+        <div class="example-content" id="exemplo-content">
+            <span class="loading">Clique em "Carregar Exemplo" para ver um comando SQL...</span>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h3>⚡ Código SQL:</h3>
+        <div class="codigo-content" id="codigo-content">
+            <span class="loading">O código aparecerá aqui...</span>
+        </div>
+    </div>
+
+    <div>
+        <button class="load-btn" id="load-btn">🔄 Carregar Exemplo</button>
+        <button class="load-btn" id="reload-btn">🎲 Outro Exemplo</button>
+    </div>
+</div>
+
+<script type="module">
+import { Client, Functions } from 'https://cdn.jsdelivr.net/npm/appwrite@20.0.0/dist/esm/sdk.js';
+
+// 1. Configuração do cliente Appwrite
+const client = new Client()
+    .setEndpoint('https://nyc.cloud.appwrite.io/v1')
+    .setProject('686a67d5003a1b4b1bf9');
+
+const functions = new Functions(client);
+const functionId = '68cd730500108dbf3959';
+
+// Elementos da página
+const exemploContent = document.getElementById('exemplo-content');
+const codigoContent = document.getElementById('codigo-content');
+const loadBtn = document.getElementById('load-btn');
+const reloadBtn = document.getElementById('reload-btn');
+
+/**
+ * Executa uma ação na Appwrite Function para buscar dados aleatórios.
+ */
+async function buscarComandoAleatorio() {
+    try {
+        // Desabilita os botões durante o carregamento
+        loadBtn.disabled = true;
+        reloadBtn.disabled = true;
+        
+        // Mostra indicadores de carregamento
+        exemploContent.innerHTML = '<span class="loading">🔄 Carregando exemplo...</span>';
+        codigoContent.innerHTML = '<span class="loading">🔄 Carregando código...</span>';
+
+        // Chama a função para buscar todos os comandos
+        const execution = await functions.createExecution(
+            functionId,
+            JSON.stringify({ acao: 'buscar-tudo', parametros: { tabela: 'comandos' } }),
+            false,
+            '/'
+        );
+
+        const data = JSON.parse(execution.responseBody);
+
+        if (data.success && Array.isArray(data.data) && data.data.length > 0) {
+            // Seleciona um comando aleatório
+            const randomIndex = Math.floor(Math.random() * data.data.length);
+            const comandoAleatorio = data.data[randomIndex];
+            
+            // Exibe o comando aleatório
+            exibirComando(comandoAleatorio);
+        } else {
+            exemploContent.innerHTML = '<div class="error">❌ Nenhum comando encontrado na base de dados.</div>';
+            codigoContent.innerHTML = '<div class="error">❌ Erro ao carregar dados.</div>';
+        }
+    } catch (error) {
+        exemploContent.innerHTML = `<div class="error">❌ Erro de comunicação: ${error.message}</div>`;
+        codigoContent.innerHTML = `<div class="error">❌ Falha na conexão com o servidor.</div>`;
+    } finally {
+        // Reabilita os botões
+        loadBtn.disabled = false;
+        reloadBtn.disabled = false;
+    }
+}
+
+/**
+ * Exibe o comando selecionado nas seções apropriadas
+ */
+function exibirComando(comando) {
+    // Assume que o objeto comando tem propriedades como 'exemplo', 'codigo', 'descricao', etc.
+    // Ajuste conforme a estrutura real da sua tabela 'comandos'
+    
+    let exemploHtml = '';
+    let codigoHtml = '';
+
+    // Verifica quais campos estão disponíveis no objeto comando
+    if (comando.exemplo || comando.descricao) {
+        exemploHtml = `
+            <div class="fade-in">
+                <strong>📋 Descrição:</strong><br>
+                ${comando.descricao || comando.exemplo || 'Sem descrição disponível'}
+                ${comando.observacao ? `<br><br><strong>💡 Observação:</strong><br>${comando.observacao}` : ''}
+            </div>
+        `;
+    }
+
+    if (comando.codigo || comando.sql || comando.comando) {
+        codigoHtml = `
+            <div class="fade-in">
+                ${comando.codigo || comando.sql || comando.comando || 'Código não disponível'}
+            </div>
+        `;
+    }
+
+    // Se não encontrar campos específicos, tenta exibir o objeto completo de forma organizada
+    if (!exemploHtml && !codigoHtml) {
+        const camposExemplo = ['nome', 'titulo', 'descricao', 'tipo', 'categoria'];
+        const camposCodigo = ['sql', 'codigo', 'comando', 'query'];
+        
+        // Procura campos para exemplo
+        for (const campo of camposExemplo) {
+            if (comando[campo]) {
+                exemploHtml = `
+                    <div class="fade-in">
+                        <strong>📋 ${campo.charAt(0).toUpperCase() + campo.slice(1)}:</strong><br>
+                        ${comando[campo]}
+                    </div>
+                `;
+                break;
+            }
+        }
+
+        // Procura campos para código
+        for (const campo of camposCodigo) {
+            if (comando[campo]) {
+                codigoHtml = `
+                    <div class="fade-in">
+                        ${comando[campo]}
+                    </div>
+                `;
+                break;
+            }
+        }
+
+        // Se ainda não encontrou nada, exibe todos os campos
+        if (!exemploHtml && !codigoHtml) {
+            const todosOsCampos = Object.entries(comando)
+                .filter(([key, value]) => value && key !== 'id')
+                .map(([key, value]) => `<strong>${key}:</strong> ${value}`)
+                .join('<br>');
+            
+            exemploHtml = `<div class="fade-in">${todosOsCampos}</div>`;
+            codigoHtml = `<div class="fade-in">ID: ${comando.id || 'N/A'}</div>`;
+        }
+    }
+
+    // Atualiza o conteúdo das seções
+    exemploContent.innerHTML = exemploHtml || '<div class="error">❌ Exemplo não disponível</div>';
+    codigoContent.innerHTML = codigoHtml || '<div class="error">❌ Código não disponível</div>';
+
+    // Adiciona indicador de sucesso
+    const successIndicator = document.createElement('span');
+    successIndicator.className = 'success-indicator';
+    successIndicator.innerHTML = ' ✅ Carregado com sucesso!';
+    successIndicator.style.fontSize = '14px';
+    successIndicator.style.float = 'right';
+    
+    setTimeout(() => {
+        if (successIndicator.parentNode) {
+            successIndicator.remove();
+        }
+    }, 3000);
+
+    exemploContent.appendChild(successIndicator);
+}
+
+/**
+ * Função alternativa para quando não há dados no banco
+ * Exibe comandos SQL de exemplo estáticos
+ */
+function exibirExemploEstatico() {
+    const exemplosEstaticos = [
+        {
+            descricao: "Buscar todos os registros de uma tabela",
+            codigo: "SELECT * FROM usuarios;"
+        },
+        {
+            descricao: "Buscar usuários ativos apenas",
+            codigo: "SELECT nome, email FROM usuarios WHERE ativo = true;"
+        },
+        {
+            descricao: "Inserir um novo usuário",
+            codigo: "INSERT INTO usuarios (nome, email, ativo) VALUES ('João Silva', 'joao@email.com', true);"
+        },
+        {
+            descricao: "Atualizar dados de um usuário",
+            codigo: "UPDATE usuarios SET email = 'novo@email.com' WHERE id = 1;"
+        },
+        {
+            descricao: "Deletar usuário inativo",
+            codigo: "DELETE FROM usuarios WHERE ativo = false;"
+        },
+        {
+            descricao: "Contar total de usuários",
+            codigo: "SELECT COUNT(*) as total_usuarios FROM usuarios;"
+        }
+    ];
+
+    const exemploAleatorio = exemplosEstaticos[Math.floor(Math.random() * exemplosEstaticos.length)];
+    exibirComando({
+        descricao: exemploAleatorio.descricao,
+        codigo: exemploAleatorio.codigo
+    });
+}
+
+// Event Listeners
+loadBtn.addEventListener('click', buscarComandoAleatorio);
+reloadBtn.addEventListener('click', buscarComandoAleatorio);
+
+// Carrega um exemplo automaticamente quando a página é carregada
+document.addEventListener('DOMContentLoaded', () => {
+    // Delay pequeno para melhor UX
+    setTimeout(buscarComandoAleatorio, 500);
+});
+</script>
+
+</body>
+</html>
