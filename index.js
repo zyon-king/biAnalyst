@@ -96,8 +96,8 @@ module.exports = async ({ req, res, log, error }) => {
 const { Client, Databases, Query } = require('node-appwrite');
 
 module.exports = async ({ req, res, log }) => {
-    const client = new Client();
-    client
+    // Configuração do ambiente Appwrite
+    const client = new Client()
         .setEndpoint(process.env.APPWRITE_ENDPOINT)
         .setProject(process.env.APPWRITE_FUNCTION_PROJECT_ID)
         .setKey(process.env.APPWRITE_API_KEY);
@@ -107,14 +107,18 @@ module.exports = async ({ req, res, log }) => {
     const DATABASE_ID = process.env.DATABASE_ID;
     const COLLECTION_ID = process.env.COLLECTION_ID;
 
-    // Tenta analisar o corpo da requisição para encontrar a 'acao'
+    // Tenta analisar o corpo da requisição
     let requestBody;
     try {
-        requestBody = JSON.parse(req.body);
+        // A Appwrite Function parseia automaticamente o corpo JSON para você
+        requestBody = req.body;
+        // Ou, se o corpo não for JSON, pode ser necessário parsear manualmente:
+        // requestBody = JSON.parse(req.body);
     } catch (e) {
         return res.json({ success: false, message: 'Corpo da requisição inválido.' }, 400);
     }
     
+    // Agora a 'acao' e os 'parametros' são acessados diretamente
     const { acao, parametros } = requestBody;
 
     // Verifica a ação solicitada
@@ -147,14 +151,9 @@ module.exports = async ({ req, res, log }) => {
             return res.json({ success: false, message: 'Falha ao buscar a pergunta do quiz.' }, 500);
         }
 
-    } else if (acao === 'outraAcao') {
-        // Lógica para outras ações (ex: consultar um comando específico)
-        // ...
-        return res.json({ success: true, message: `Ação '${acao}' executada.` });
-
     } else {
         // Ação desconhecida
-        return res.json({ success: false, message: 'Ação desconhecida.' }, 400);
+        return res.json({ success: false, message: 'Ação não reconhecida.' }, 400);
     }
 };
 
