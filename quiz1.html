@@ -174,17 +174,17 @@ const loadBtn = document.getElementById('load-btn');
 const reloadBtn = document.getElementById('reload-btn');
 
 /**
- * Executa uma ação na Appwrite Function para buscar dados aleatórios.
+ * Executa uma ação na Appwrite Function para buscar 5 comandos aleatórios.
  */
-async function buscarComandoAleatorio() {
+async function buscarComandosAleatorios() {
     try {
         // Desabilita os botões durante o carregamento
         loadBtn.disabled = true;
         reloadBtn.disabled = true;
         
         // Mostra indicadores de carregamento
-        exemploContent.innerHTML = '<span class="loading">🔄 Carregando exemplo...</span>';
-        codigoContent.innerHTML = '<span class="loading">🔄 Carregando código...</span>';
+        exemploContent.innerHTML = '<span class="loading">🔄 Carregando exemplos...</span>';
+        codigoContent.innerHTML = '<span class="loading">🔄 Carregando códigos...</span>';
 
         // Chama a função para buscar todos os comandos
         const execution = await functions.createExecution(
@@ -197,12 +197,11 @@ async function buscarComandoAleatorio() {
         const data = JSON.parse(execution.responseBody);
 
         if (data.success && Array.isArray(data.data) && data.data.length > 0) {
-            // Seleciona um comando aleatório
-            const randomIndex = Math.floor(Math.random() * data.data.length);
-            const comandoAleatorio = data.data[randomIndex];
+            // Seleciona 5 comandos aleatórios (ou todos se houver menos de 5)
+            const comandosAleatorios = selecionarComandosAleatorios(data.data, 5);
             
-            // Exibe o comando aleatório
-            exibirComando(comandoAleatorio);
+            // Exibe os comandos selecionados
+            exibirMultiplosComandos(comandosAleatorios);
         } else {
             exemploContent.innerHTML = '<div class="error">❌ Nenhum comando encontrado na base de dados.</div>';
             codigoContent.innerHTML = '<div class="error">❌ Erro ao carregar dados.</div>';
@@ -218,143 +217,140 @@ async function buscarComandoAleatorio() {
 }
 
 /**
- * Exibe o comando selecionado nas seções apropriadas
+ * Seleciona uma quantidade específica de comandos aleatórios sem repetição
  */
-function exibirComando(comando) {
-    // Assume que o objeto comando tem propriedades como 'exemplo', 'codigo', 'descricao', etc.
-    // Ajuste conforme a estrutura real da sua tabela 'comandos'
-    
-    let exemploHtml = '';
-    let codigoHtml = '';
+function selecionarComandosAleatorios(comandos, quantidade) {
+    const comandosEmbaralhados = [...comandos].sort(() => Math.random() - 0.5);
+    return comandosEmbaralhados.slice(0, Math.min(quantidade, comandos.length));
+}
 
-    // Verifica quais campos estão disponíveis no objeto comando
-    if (comando.exemplo || comando.descricao) {
-        exemploHtml = `
-            <div class="fade-in">
-                <strong>📋 Descrição:</strong><br>
-                ${comando.descricao || comando.exemplo || 'Sem descrição disponível'}
-                ${comando.observacao ? `<br><br><strong>💡 Observação:</strong><br>${comando.observacao}` : ''}
+/**
+ * Exibe múltiplos comandos nas seções apropriadas
+ */
+function exibirMultiplosComandos(comandos) {
+    let exemploHtml = '<div class="fade-in">';
+    let codigoHtml = '<div class="fade-in">';
+
+    comandos.forEach((comando, index) => {
+        // Monta o HTML para exemplos usando os campos corretos
+        exemploHtml += `
+            <div style="margin-bottom: 25px; padding: 15px; border-left: 4px solid #4a148c; background: rgba(0,0,0,0.2);">
+                <strong>📋 ${comando.nome_comando || `Comando ${index + 1}`}:</strong><br>
+                ${comando.exemplo_comando || 'Nenhum exemplo disponível'}
+                ${comando.id ? `<br><small style="color: #666;">🔢 ID: ${comando.id}</small>` : ''}
             </div>
         `;
-    }
 
-    if (comando.codigo || comando.sql || comando.comando) {
-        codigoHtml = `
-            <div class="fade-in">
-                ${comando.codigo || comando.sql || comando.comando || 'Código não disponível'}
+        // Monta o HTML para códigos usando o campo correto
+        codigoHtml += `
+            <div style="margin-bottom: 20px; padding: 12px; background: rgba(74, 20, 140, 0.2); border-radius: 6px; border: 1px solid #4a148c;">
+                <small style="color: #ccc; font-size: 12px;">${comando.nome_comando || `Comando ${index + 1}`}:</small><br>
+                <code style="color: #e0e0e0; font-weight: bold; white-space: pre-wrap;">
+${comando.codigo_comando || 'Código não disponível'}
+                </code>
             </div>
         `;
-    }
+    });
 
-    // Se não encontrar campos específicos, tenta exibir o objeto completo de forma organizada
-    if (!exemploHtml && !codigoHtml) {
-        const camposExemplo = ['nome', 'titulo', 'descricao', 'tipo', 'categoria'];
-        const camposCodigo = ['sql', 'codigo', 'comando', 'query'];
-        
-        // Procura campos para exemplo
-        for (const campo of camposExemplo) {
-            if (comando[campo]) {
-                exemploHtml = `
-                    <div class="fade-in">
-                        <strong>📋 ${campo.charAt(0).toUpperCase() + campo.slice(1)}:</strong><br>
-                        ${comando[campo]}
-                    </div>
-                `;
-                break;
-            }
-        }
-
-        // Procura campos para código
-        for (const campo of camposCodigo) {
-            if (comando[campo]) {
-                codigoHtml = `
-                    <div class="fade-in">
-                        ${comando[campo]}
-                    </div>
-                `;
-                break;
-            }
-        }
-
-        // Se ainda não encontrou nada, exibe todos os campos
-        if (!exemploHtml && !codigoHtml) {
-            const todosOsCampos = Object.entries(comando)
-                .filter(([key, value]) => value && key !== 'id')
-                .map(([key, value]) => `<strong>${key}:</strong> ${value}`)
-                .join('<br>');
-            
-            exemploHtml = `<div class="fade-in">${todosOsCampos}</div>`;
-            codigoHtml = `<div class="fade-in">ID: ${comando.id || 'N/A'}</div>`;
-        }
-    }
+    exemploHtml += '</div>';
+    codigoHtml += '</div>';
 
     // Atualiza o conteúdo das seções
-    exemploContent.innerHTML = exemploHtml || '<div class="error">❌ Exemplo não disponível</div>';
-    codigoContent.innerHTML = codigoHtml || '<div class="error">❌ Código não disponível</div>';
+    exemploContent.innerHTML = exemploHtml;
+    codigoContent.innerHTML = codigoHtml;
 
     // Adiciona indicador de sucesso
-    const successIndicator = document.createElement('span');
+    const successIndicator = document.createElement('div');
     successIndicator.className = 'success-indicator';
-    successIndicator.innerHTML = ' ✅ Carregado com sucesso!';
+    successIndicator.innerHTML = `✅ ${comandos.length} comandos SQL carregados com sucesso!`;
     successIndicator.style.fontSize = '14px';
-    successIndicator.style.float = 'right';
+    successIndicator.style.textAlign = 'center';
+    successIndicator.style.margin = '10px 0';
+    successIndicator.style.padding = '8px';
+    successIndicator.style.background = 'rgba(76, 175, 80, 0.2)';
+    successIndicator.style.borderRadius = '6px';
+    successIndicator.style.border = '1px solid #4caf50';
+    
+    exemploContent.insertBefore(successIndicator, exemploContent.firstChild);
     
     setTimeout(() => {
         if (successIndicator.parentNode) {
             successIndicator.remove();
         }
-    }, 3000);
-
-    exemploContent.appendChild(successIndicator);
+    }, 4000);
 }
 
 /**
  * Função alternativa para quando não há dados no banco
- * Exibe comandos SQL de exemplo estáticos
+ * Exibe 5 comandos SQL de exemplo estáticos
  */
-function exibirExemploEstatico() {
+function exibirExemplosEstaticos() {
     const exemplosEstaticos = [
         {
             descricao: "Buscar todos os registros de uma tabela",
-            codigo: "SELECT * FROM usuarios;"
+            codigo: "SELECT * FROM usuarios;",
+            tipo: "SELECT"
         },
         {
-            descricao: "Buscar usuários ativos apenas",
-            codigo: "SELECT nome, email FROM usuarios WHERE ativo = true;"
+            descricao: "Buscar usuários ativos apenas com campos específicos",
+            codigo: "SELECT nome, email FROM usuarios WHERE ativo = true;",
+            tipo: "SELECT"
         },
         {
-            descricao: "Inserir um novo usuário",
-            codigo: "INSERT INTO usuarios (nome, email, ativo) VALUES ('João Silva', 'joao@email.com', true);"
+            descricao: "Inserir um novo usuário na tabela",
+            codigo: "INSERT INTO usuarios (nome, email, ativo) VALUES ('João Silva', 'joao@email.com', true);",
+            tipo: "INSERT"
         },
         {
-            descricao: "Atualizar dados de um usuário",
-            codigo: "UPDATE usuarios SET email = 'novo@email.com' WHERE id = 1;"
+            descricao: "Atualizar dados de um usuário existente",
+            codigo: "UPDATE usuarios SET email = 'novo@email.com' WHERE id = 1;",
+            tipo: "UPDATE"
         },
         {
-            descricao: "Deletar usuário inativo",
-            codigo: "DELETE FROM usuarios WHERE ativo = false;"
+            descricao: "Deletar usuários inativos da base",
+            codigo: "DELETE FROM usuarios WHERE ativo = false;",
+            tipo: "DELETE"
         },
         {
-            descricao: "Contar total de usuários",
-            codigo: "SELECT COUNT(*) as total_usuarios FROM usuarios;"
+            descricao: "Contar total de usuários cadastrados",
+            codigo: "SELECT COUNT(*) as total_usuarios FROM usuarios;",
+            tipo: "COUNT"
+        },
+        {
+            descricao: "Buscar usuários ordenados por nome",
+            codigo: "SELECT * FROM usuarios ORDER BY nome ASC;",
+            tipo: "SELECT"
+        },
+        {
+            descricao: "Buscar usuários com email específico",
+            codigo: "SELECT * FROM usuarios WHERE email LIKE '%@gmail.com';",
+            tipo: "SELECT"
+        },
+        {
+            descricao: "Criar uma nova tabela de produtos",
+            codigo: "CREATE TABLE produtos (id INT PRIMARY KEY, nome VARCHAR(100), preco DECIMAL(10,2));",
+            tipo: "CREATE"
+        },
+        {
+            descricao: "Fazer join entre tabelas de usuários e pedidos",
+            codigo: "SELECT u.nome, p.data_pedido FROM usuarios u INNER JOIN pedidos p ON u.id = p.usuario_id;",
+            tipo: "JOIN"
         }
     ];
 
-    const exemploAleatorio = exemplosEstaticos[Math.floor(Math.random() * exemplosEstaticos.length)];
-    exibirComando({
-        descricao: exemploAleatorio.descricao,
-        codigo: exemploAleatorio.codigo
-    });
+    // Seleciona 5 exemplos aleatórios
+    const exemplosAleatorios = selecionarComandosAleatorios(exemplosEstaticos, 5);
+    exibirMultiplosComandos(exemplosAleatorios);
 }
 
 // Event Listeners
-loadBtn.addEventListener('click', buscarComandoAleatorio);
-reloadBtn.addEventListener('click', buscarComandoAleatorio);
+loadBtn.addEventListener('click', buscarComandosAleatorios);
+reloadBtn.addEventListener('click', buscarComandosAleatorios);
 
-// Carrega um exemplo automaticamente quando a página é carregada
+// Carrega exemplos automaticamente quando a página é carregada
 document.addEventListener('DOMContentLoaded', () => {
     // Delay pequeno para melhor UX
-    setTimeout(buscarComandoAleatorio, 500);
+    setTimeout(buscarComandosAleatorios, 500);
 });
 </script>
 
