@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificação de Inatividade</title>
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #007BFF;
+            margin-bottom: 1rem;
+        }
+        p {
+            font-size: 1.1em;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Página de Exemplo</h1>
+        <p>A permissão para notificações será solicitada ao carregar a página.</p>
+        <p id="status-message">Aguardando permissão...</p>
+    </div>
+
+    <script>
+        const INATIVIDADE_LIMITE_MINUTOS = 20; // Altere este valor para o tempo desejado
+        const INTERVALO_NOTIFICACAO_SEGUNDOS = 60;
+
+        let ultimoClique = Date.now();
+        let intervaloNotificacaoId = null;
+        let intervaloVerificacaoId = null;
+
+        function init() {
+            console.log('DOM carregado. Iniciando script.');
+            requestPermission();
+            
+            document.addEventListener('click', resetarContador);
+            document.addEventListener('keypress', resetarContador);
+
+            // Inicia a verificação com um atraso igual ao tempo de inatividade.
+            // Isso evita verificações desnecessárias a cada 1 minuto.
+            intervaloVerificacaoId = setTimeout(verificarInatividade, INATIVIDADE_LIMITE_MINUTOS * 60000); 
+            atualizarStatus('Clique em qualquer lugar da página para reiniciar o contador.');
+        }
+
+        function requestPermission() {
+            if (!('Notification' in window)) {
+                alert('Este navegador não suporta notificações.');
+                atualizarStatus('Seu navegador não suporta notificações.');
+                return;
+            }
+
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    console.log('Permissão para notificações concedida.');
+                    atualizarStatus('Permissão para notificações concedida! O temporizador de inatividade está ativo.');
+                } else {
+                    console.log('Permissão para notificações negada.');
+                    atualizarStatus('Permissão para notificações negada.');
+                }
+            });
+        }
+
+        function verificarInatividade() {
+            const tempoDecorrido = (Date.now() - ultimoClique) / 1000 / 60; // em minutos
+            console.log(`Tempo de inatividade: ${tempoDecorrido.toFixed(2)} minutos.`);
+
+            if (tempoDecorrido >= INATIVIDADE_LIMITE_MINUTOS) {
+                if (!intervaloNotificacaoId) {
+                    // Começa a enviar notificações
+                    console.log('Limite de inatividade atingido. Começando a enviar notificações.');
+                    atualizarStatus('Clique em qualquer lugar da página para parar de receber notificações.');
+
+                    enviarNotificacao(); // Envia a primeira imediatamente
+                    intervaloNotificacaoId = setInterval(enviarNotificacao, INTERVALO_NOTIFICACAO_SEGUNDOS * 1000);
+                }
+            }
+        }
+
+        function enviarNotificacao() {
+            if (Notification.permission === 'granted') {
+                new Notification('Você ainda está aí?', {
+                    body: 'Clique na página para parar de receber notificações.',
+                    icon: 'https://cdn.icon-icons.com/icons2/1369/PNG/512/-notification_89753.png'
+                });
+            } else {
+                // Se a permissão foi revogada, para de tentar
+                clearInterval(intervaloNotificacaoId);
+                console.log('Permissão de notificação revogada. Parando o envio.');
+                atualizarStatus('Permissão de notificação revogada. O envio foi interrompido.');
+            }
+        }
+
+        function resetarContador() {
+            ultimoClique = Date.now();
+            console.log('Atividade detectada. Contador de inatividade resetado.');
+            
+            // Limpa o temporizador existente
+            clearTimeout(intervaloVerificacaoId);
+            clearInterval(intervaloNotificacaoId);
+            intervaloNotificacaoId = null;
+
+            // Reinicia o temporizador de verificação
+            intervaloVerificacaoId = setTimeout(verificarInatividade, INATIVIDADE_LIMITE_MINUTOS * 60000);
+            
+            console.log('Temporizador de notificação limpo.');
+            atualizarStatus('Bem-vindo de volta! O contador de inatividade foi reiniciado.');
+        }
+
+        function atualizarStatus(mensagem) {
+            document.getElementById('status-message').textContent = mensagem;
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
