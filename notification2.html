@@ -1,4 +1,3 @@
-<!- https://pixabay.com/pt/sound-effects/livechat-129007/ -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -50,8 +49,9 @@
 
     <script>
         // Define o horário do alarme
-        const alarme = "11:30"; // Formato HH:mm
-
+        const alarme = "15:13"; // Formato HH:mmconst 			
+        const notificationSound = new Audio('https://github.com/akx/Notifications/raw/refs/heads/master/WAV/Enharpment.wav');
+        
         // Variáveis de controle
         let intervaloNotificacaoId = null;
         let contagemRegressivaEmMinutos = 0;
@@ -82,8 +82,8 @@
                 atualizarStatus('Este navegador não suporta notificações.');
                 return;
             }
-
-            Notification.requestPermission().then(permission => {
+            
+  Notification.requestPermission().then(permission => {
                 if (permission === 'granted') {
                     console.log('Permissão para notificações concedida.');
                     atualizarStatus('Permissão concedida! O temporizador de inatividade está ativo.');
@@ -98,7 +98,7 @@
             if (intervaloNotificacaoId === null) {
                 console.log('Limite de inatividade atingido. Começando a enviar notificações.');
                 atualizarStatus('Clique em qualquer lugar da página para parar de receber notificações.');
-
+				
                 enviarNotificacao();
                 intervaloNotificacaoId = setInterval(enviarNotificacao, 60000); // Envia a cada 1 minuto
             }
@@ -111,15 +111,22 @@
                     icon: 'https://cdn.icon-icons.com/icons2/1369/PNG/512/-notification_89753.png'
                 });
 
+                // Toca o som da notificação
+                notificationSound.play();
+                
                 // Adiciona um evento de clique à notificação
                 notificacao.onclick = function() {
-                    // Foca na aba atual do navegador onde a notificação foi criada
+                	notificationSound.pause();
+                	notificationSound.currentTime = 0;
+                
+                    // Tenta focar na aba que gerou a notificação
                     window.focus(); 
-                    // Fecha a notificação após o clique
+                    // Fecha a notificação
                     notificacao.close();
                 };
 
             } else {
+                // Se a permissão foi revogada, para o som e o temporizador
                 clearInterval(intervaloNotificacaoId);
                 intervaloNotificacaoId = null;
                 console.log('Permissão de notificação revogada. Parando o envio.');
@@ -141,14 +148,18 @@
             if (window.intervaloVerificacaoId) {
                 clearTimeout(window.intervaloVerificacaoId);
             }
-
+            
             window.amentoVerificacaoId = setTimeout(verificarInatividade, tempoEmMs);
             console.log(`Próxima verificação em ${contagemRegressivaEmMinutos} minutos.`);
             atualizarStatus('Bem-vindo de volta! O contador de inatividade foi reiniciado.');
         }
 
         function atualizarStatus(mensagem) {
-            document.getElementById('status').innerText = mensagem;
+            document.getElementById('status').innerText = mensagem;           
+				
+			// Para o som quando o usuário interage
+            notificationSound.pause();
+            notificationSound.currentTime = 0;
         }
 
         function init() {
